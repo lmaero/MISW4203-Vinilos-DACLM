@@ -1,7 +1,6 @@
 package com.example.grupo11_vinilos.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -17,15 +16,12 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Get the navigation host fragment from this Activity
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        // Instantiate the navController using the NavHostFragment
         navController = navHostFragment.navController
-        // Make sure actions in the ActionBar get propagated to the NavController
-        Log.d("act", navController.toString())
-        //setupActionBarWithNavController(navController)
 
+        setSupportActionBar(findViewById(R.id.mainToolbar))
+        setupActionBarWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
