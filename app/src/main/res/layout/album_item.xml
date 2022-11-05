@@ -16,29 +16,52 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/stroke_color"
-            app:strokeWidth="1dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginHorizontal="20dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/albumTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{album.name}" />
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@{album.name}"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:typeface="normal" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/albumGenre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{album.description}" />
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@{album.genre}"
+                    android:textColor="@color/gray_em"
+                    android:textSize="15sp"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:id="@+id/albumYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@{album.releaseDate.substring(0,4)}"
+                    android:textColor="@color/gray_em"
+                    android:textSize="15sp"
+                    android:typeface="normal" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
