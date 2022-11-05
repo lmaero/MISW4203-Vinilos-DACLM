@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         // Make sure actions in the ActionBar get propagated to the NavController
         Log.d("act", navController.toString())
-        setupActionBarWithNavController(navController)
+        //setupActionBarWithNavController(navController)
 
     }
 
