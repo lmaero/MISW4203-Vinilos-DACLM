@@ -19,7 +19,7 @@
         android:id="@+id/albumDetailRv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/album_item">
+        tools:listitem="@layout/album_detail_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 

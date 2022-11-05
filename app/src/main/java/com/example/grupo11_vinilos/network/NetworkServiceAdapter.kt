@@ -69,9 +69,8 @@ class NetworkServiceAdapter constructor(context: Context) {
         requestQueue.add(
             getRequest("albums/$albumId",
                 Response.Listener<String> { response ->
-                    Log.d("Luis", response)
                     val resp = JSONArray(response)
-                    onComplete(AlbumDetail(0, "", "", "", "", "", "", "", "", ""))
+                    onComplete(AlbumDetail(100, "", "", "", "", "", "", "", "", ""))
                 },
                 Response.ErrorListener {
                     onError(it)

@@ -29,7 +29,6 @@ class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVi
     override fun onBindViewHolder(holder: AlbumDetailViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.albumDetail = albumDetail
-            println(position)
         }
     }
 
@@ -41,7 +40,7 @@ class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVi
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
-            val LAYOUT = R.layout.album_detail_fragment
+            val LAYOUT = R.layout.album_detail_item
         }
     }
 }
