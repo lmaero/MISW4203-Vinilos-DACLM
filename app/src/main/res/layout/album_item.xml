@@ -29,10 +29,10 @@
 
                 <ImageView
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="10dp"
                     android:contentDescription="@{album.name}"
-                    android:src="@mipmap/ic_launcher" />
+                    app:imageUrl="@{album.cover}" />
 
                 <LinearLayout
                     android:layout_width="300dp"
