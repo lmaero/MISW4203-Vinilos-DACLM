@@ -2,17 +2,16 @@ package com.example.grupo11_vinilos.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.grupo11_vinilos.models.Album
 import com.example.grupo11_vinilos.models.AlbumDetail
 import com.example.grupo11_vinilos.repositories.AlbumDetailRepository
 
-class AlbumDetailViewModel(application: Application) : AndroidViewModel(application) {
+class AlbumDetailViewModel(application: Application, albumId: Int) : AndroidViewModel(application) {
 
     private val albumDetailRepository = AlbumDetailRepository(application)
 
-    private val _albumDetail = MutableLiveData<Album>()
+    private val _albumDetail = MutableLiveData<AlbumDetail>()
 
-    val albumDetail: LiveData<Album>
+    val albumDetail: LiveData<AlbumDetail>
         get() = _albumDetail
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
@@ -25,12 +24,14 @@ class AlbumDetailViewModel(application: Application) : AndroidViewModel(applicat
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+    val id: Int = albumId
+
     init {
         refreshDataFromNetwork()
     }
 
     private fun refreshDataFromNetwork() {
-        albumDetailRepository.refreshData({
+        albumDetailRepository.refreshData(id, {
             _albumDetail.postValue(it)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
@@ -43,11 +44,11 @@ class AlbumDetailViewModel(application: Application) : AndroidViewModel(applicat
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(val app: Application, val albumId: Int) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlbumDetailViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumDetailViewModel(app) as T
+                return AlbumDetailViewModel(app, albumId) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

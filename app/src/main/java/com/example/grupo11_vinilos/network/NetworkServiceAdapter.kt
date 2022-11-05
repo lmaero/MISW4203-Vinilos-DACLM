@@ -1,6 +1,7 @@
 package com.example.grupo11_vinilos.network
 
 import android.content.Context
+import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -8,6 +9,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.grupo11_vinilos.models.Album
+import com.example.grupo11_vinilos.models.AlbumDetail
 import org.json.JSONArray
 
 class NetworkServiceAdapter constructor(context: Context) {
@@ -61,14 +63,15 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     fun getAlbumDetail(
         albumId: Int,
-        onComplete: (resp: Album) -> Unit,
+        onComplete: (resp: AlbumDetail) -> Unit,
         onError: (error: VolleyError) -> Unit
     ) {
         requestQueue.add(
             getRequest("albums/$albumId",
                 Response.Listener<String> { response ->
+                    Log.d("Luis", response)
                     val resp = JSONArray(response)
-                    println(resp)
+                    onComplete(AlbumDetail(0, "", "", "", "", "", "", "", "", ""))
                 },
                 Response.ErrorListener {
                     onError(it)
