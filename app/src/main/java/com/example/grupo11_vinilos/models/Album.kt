@@ -1,6 +1,7 @@
 package com.example.grupo11_vinilos.models
 
 import org.json.JSONArray
+import org.json.JSONObject
 
 data class Album(
     val albumId: Int,
@@ -10,5 +11,5 @@ data class Album(
     val description: String,
     val genre: String,
     val recordLabel: String,
-    val performers: JSONArray
+    val performers: String
 )

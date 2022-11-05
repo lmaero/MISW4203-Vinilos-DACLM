@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif"
-                        android:text="@{album.genre}"
+                        android:text="@{album.performers}"
                         android:textColor="@color/gray_em"
                         android:textSize="15sp"
                         android:typeface="normal" />

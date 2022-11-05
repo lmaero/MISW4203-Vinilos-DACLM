@@ -34,6 +34,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val list = mutableListOf<Album>()
                     for (i in 0 until resp.length()) {
                         val item = resp.getJSONObject(i)
+                        var performer = item.getString("performers").substring(19,100).substringBefore(",").substringBefore("\"")
                         list.add(
                             i,
                             Album(
@@ -44,7 +45,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                                 releaseDate = item.getString("releaseDate"),
                                 genre = item.getString("genre"),
                                 description = item.getString("description"),
-                                performers = item.getJSONArray("performers")
+                                performers = performer
                             )
                         )
                     }
