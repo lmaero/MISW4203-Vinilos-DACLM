@@ -11,6 +11,7 @@ import com.android.volley.toolbox.Volley
 import com.example.grupo11_vinilos.models.Album
 import com.example.grupo11_vinilos.models.AlbumDetail
 import org.json.JSONArray
+import org.json.JSONObject
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object {
@@ -69,8 +70,16 @@ class NetworkServiceAdapter constructor(context: Context) {
         requestQueue.add(
             getRequest("albums/$albumId",
                 Response.Listener<String> { response ->
-                    val resp = JSONArray(response)
-                    onComplete(AlbumDetail(100, "", "", "", "", "", "", "", "", ""))
+                    //val resp = JSONArray(response)
+                    val resp = JSONObject(response)
+                    val id = resp.getInt("id")
+                    val name = resp.getString("name")
+                    val cover = resp.getString("cover")
+                    val releaseDate = resp.getString("releaseDate")
+                    val description = resp.getString("description")
+                    val genre = resp.getString("genre")
+                    val recordLabel = resp.getString("recordLabel")
+                    onComplete(AlbumDetail(id, name, cover, releaseDate, description, genre, recordLabel, "", "", ""))
                 },
                 Response.ErrorListener {
                     onError(it)
