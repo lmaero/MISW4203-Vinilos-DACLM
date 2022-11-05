@@ -3,6 +3,7 @@ package com.example.grupo11_vinilos.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.grupo11_vinilos.models.Album
+import com.example.grupo11_vinilos.models.AlbumDetail
 import com.example.grupo11_vinilos.repositories.AlbumDetailRepository
 
 class AlbumDetailViewModel(application: Application) : AndroidViewModel(application) {
@@ -44,9 +45,9 @@ class AlbumDetailViewModel(application: Application) : AndroidViewModel(applicat
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(AlbumDetailViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumViewModel(app) as T
+                return AlbumDetailViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

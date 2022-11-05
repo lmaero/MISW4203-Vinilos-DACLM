@@ -6,28 +6,30 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
+import com.example.grupo11_vinilos.models.Album
+import com.example.grupo11_vinilos.models.AlbumDetail
 
 class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailViewHolder>() {
-    var albumDetail: <Album> = null
-    set(value )
+    var albumDetail: AlbumDetail = AlbumDetail(0, "", "", "", "", "", "", "", "", "")
+    set(value)
     {
         field = value
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
-        val withDataBinding: CommentItemBinding = DataBindingUtil.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumDetailViewHolder {
+        val withDataBinding: AlbumDetailItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            CommentViewHolder.LAYOUT,
+            AlbumDetailViewHolder.LAYOUT,
             parent,
             false
         )
-        return CommentViewHolder(withDataBinding)
+        return AlbumDetailViewHolder(withDataBinding)
     }
 
-    override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AlbumDetailViewHolder, position: Int) {
         holder.viewDataBinding.also {
-            it.comment = albumDetail[position]
+            it.albumDetail = albumDetail[position]
         }
     }
 

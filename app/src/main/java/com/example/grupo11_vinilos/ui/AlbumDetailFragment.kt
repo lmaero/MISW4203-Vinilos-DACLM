@@ -16,13 +16,14 @@ import com.example.grupo11_vinilos.databinding.AlbumFragmentBinding
 import com.example.grupo11_vinilos.databinding.AlbumItemBinding
 import com.example.grupo11_vinilos.models.Album
 import com.example.grupo11_vinilos.ui.adapters.AlbumsAdapter
+import com.example.grupo11_vinilos.viewmodels.AlbumDetailViewModel
 import com.example.grupo11_vinilos.viewmodels.AlbumViewModel
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class AlbumFragment : Fragment() {
-    private var _binding: AlbumFragmentBinding? = null
+class AlbumDetailFragment : Fragment() {
+    private var _binding: AlbumDetailFragment? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumViewModel
@@ -32,9 +33,9 @@ class AlbumFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = AlbumFragmentBinding.inflate(inflater, container, false)
+        _binding = AlbumDetailFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = AlbumsAdapter()
+        viewModelAdapter = AlbumsDetailAdapter()
         return view
     }
 
@@ -52,8 +53,8 @@ class AlbumFragment : Fragment() {
         activity.actionBar?.title = getString(R.string.title_albums)
         viewModel = ViewModelProvider(
             this,
-            AlbumViewModel.Factory(activity.application)
-        ).get(AlbumViewModel::class.java)
+            AlbumDetailViewModel.Factory(activity.application)
+        ).get(AlbumDetailViewModel::class.java)
         viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
             it.apply {
                 viewModelAdapter!!.albums = this
