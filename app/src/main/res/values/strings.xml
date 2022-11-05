@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">grupo11-vinilos</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="collector_phone_placeholder">Número telefónico</string>
+    <string name="comment_rating_placeholder">##</string>
+    <string name="album_name_placeholder">Nombre del album</string>
+    <string name="album_description_placeholder">Descripcion del album</string>
+    <string name="title_albums">Albums</string>
 </resources>
