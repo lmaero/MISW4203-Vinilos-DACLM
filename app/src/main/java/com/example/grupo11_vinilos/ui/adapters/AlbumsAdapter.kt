@@ -52,6 +52,4 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
             val LAYOUT = R.layout.album_item
         }
     }
-
-
 }
