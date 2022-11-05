@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.AlbumFragmentBinding
+import com.example.grupo11_vinilos.databinding.AlbumItemBinding
 import com.example.grupo11_vinilos.models.Album
 import com.example.grupo11_vinilos.ui.adapters.AlbumsAdapter
 import com.example.grupo11_vinilos.viewmodels.AlbumViewModel
@@ -56,6 +57,8 @@ class AlbumFragment : Fragment() {
             it.apply {
                 viewModelAdapter!!.albums = this
             }
+            val imageURLs = it.map { it.cover }
+            println(imageURLs)
         })
         viewModel.eventNetworkError.observe(
             viewLifecycleOwner,
