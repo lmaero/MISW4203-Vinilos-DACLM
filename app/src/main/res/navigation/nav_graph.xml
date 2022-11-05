@@ -8,9 +8,20 @@
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.grupo11_vinilos.ui.AlbumFragment"
-        android:label="Vinilos App"
+        android:label="album_fragment"
         tools:layout="@layout/album_fragment">
-        <action android:id="@+id/action_collectorFragment_to_albumFragment" />
+        <action
+            android:id="@+id/action_albumFragment_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/albumDetailFragment"
+        android:name="com.example.grupo11_vinilos.ui.AlbumDetailFragment"
+        android:label="album_detail_fragment"
+        tools:layout="@layout/album_detail_fragment">
+        <argument
+            android:name="albumId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
