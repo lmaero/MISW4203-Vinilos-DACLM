@@ -28,6 +28,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/albumCover"
                     android:layout_width="100dp"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="10dp"
