@@ -14,7 +14,7 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class AlbumFragmentTest {
+class MusicianFragmentTest {
     @Rule
     @JvmField
     var activityRule = ActivityScenarioRule<MainActivity>(
@@ -22,22 +22,17 @@ class AlbumFragmentTest {
     )
 
     @Test
-    fun title_album_is_displayed() {
-        onView(allOf(withId(R.id.albumTitle), isDisplayed()))
+    fun musician_name_is_displayed() {
+        onView(allOf(withId(R.id.musicianName), isDisplayed()))
     }
 
     @Test
-    fun genre_album_is_displayed() {
-        onView(allOf(withId(R.id.albumGenre), isDisplayed()))
+    fun musician_birthdate_is_displayed() {
+        onView(allOf(withId(R.id.musicianBirthDate), isDisplayed()))
     }
 
     @Test
-    fun year_album_is_displayed() {
-        onView(allOf(withId(R.id.albumYear), isDisplayed()))
-    }
-
-    @Test
-    fun cover_album_is_displayed() {
-        onView(allOf(withId(R.id.albumCover), isCompletelyDisplayed()))
+    fun musician_portrait_is_displayed() {
+        onView(allOf(withId(R.id.musicianPortrait), isCompletelyDisplayed()))
     }
 }

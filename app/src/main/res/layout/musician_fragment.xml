@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.AlbumFragment">
+    tools:context=".ui.MusicianFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,9 +41,9 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/albumsRv"
+        android:id="@+id/musiciansRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/album_item" />
+        tools:listitem="@layout/musician_item" />
 
 </LinearLayout>
