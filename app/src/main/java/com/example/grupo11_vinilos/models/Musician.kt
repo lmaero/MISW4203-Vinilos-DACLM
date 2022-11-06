@@ -1,7 +1,7 @@
 package com.example.grupo11_vinilos.models
 
-data class Musician (
-    val perfomerId: Int,
+data class Musician(
+    val musicianId: Int,
     val name: String,
     val image: String,
     val description: String,

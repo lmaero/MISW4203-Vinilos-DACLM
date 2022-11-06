@@ -12,25 +12,25 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
-import com.example.grupo11_vinilos.databinding.AlbumFragmentBinding
-import com.example.grupo11_vinilos.ui.adapters.AlbumsAdapter
-import com.example.grupo11_vinilos.viewmodels.AlbumViewModel
+import com.example.grupo11_vinilos.databinding.MusicianFragmentBinding
+import com.example.grupo11_vinilos.ui.adapters.MusiciansAdapter
+import com.example.grupo11_vinilos.viewmodels.MusicianViewModel
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class AlbumFragment : Fragment() {
-    private var _binding: AlbumFragmentBinding? = null
+class MusicianFragment : Fragment() {
+    private var _binding: MusicianFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewModel: AlbumViewModel
-    private var viewModelAdapter: AlbumsAdapter? = null
+    private lateinit var viewModel: MusicianViewModel
+    private var viewModelAdapter: MusiciansAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AlbumFragmentBinding.inflate(inflater, container, false)
+        _binding = MusicianFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
 
         view.findViewById<Button>(R.id.navButtonAlbums).setOnClickListener {
@@ -41,12 +41,12 @@ class AlbumFragment : Fragment() {
             findNavController().navigate(R.id.action_albumFragment_to_musiciansFragment)
         }
 
-        viewModelAdapter = AlbumsAdapter()
+        viewModelAdapter = MusiciansAdapter()
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = binding.albumsRv
+        recyclerView = binding.musiciansRv
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
     }
@@ -57,14 +57,14 @@ class AlbumFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = getString(R.string.titleAlbums)
+        activity.actionBar?.title = getString(R.string.titleMusicians)
         viewModel = ViewModelProvider(
             this,
-            AlbumViewModel.Factory(activity.application)
-        ).get(AlbumViewModel::class.java)
-        viewModel.albums.observe(viewLifecycleOwner) {
+            MusicianViewModel.Factory(activity.application)
+        ).get(MusicianViewModel::class.java)
+        viewModel.musicians.observe(viewLifecycleOwner) {
             it.apply {
-                viewModelAdapter!!.albums = this
+                viewModelAdapter!!.musicians = this
             }
         }
         viewModel.eventNetworkError.observe(

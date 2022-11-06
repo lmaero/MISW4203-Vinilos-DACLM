@@ -126,9 +126,13 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
-    fun getMusicians(onComplete: (resp: List<Musician>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    fun getMusicians(
+        onComplete: (resp: List<Musician>) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
         requestQueue.add(
-            getRequest("musicians",
+            getRequest(
+                "musicians",
                 { response ->
                     val resp = JSONArray(response)
                     val list = mutableListOf<Musician>()
@@ -137,11 +141,11 @@ class NetworkServiceAdapter constructor(context: Context) {
                         list.add(
                             i,
                             Musician(
-                                perfomerId = item.getInt("id"),
+                                musicianId = item.getInt("id"),
                                 name = item.getString("name"),
                                 image = item.getString("image"),
                                 description = item.getString("description"),
-                                birthDate = item.getString("genre")
+                                birthDate = item.getString("birthDate")
                             )
                         )
                     }
