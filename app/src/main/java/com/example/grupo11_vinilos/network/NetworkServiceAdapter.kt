@@ -10,6 +10,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.grupo11_vinilos.models.Album
 import com.example.grupo11_vinilos.models.AlbumDetail
+import com.example.grupo11_vinilos.models.Comment
+import com.example.grupo11_vinilos.models.Track
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -79,7 +81,26 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val description = resp.getString("description")
                     val genre = resp.getString("genre")
                     val recordLabel = resp.getString("recordLabel")
-                    onComplete(AlbumDetail(id, name, cover, releaseDate, description, genre, recordLabel, "", "", ""))
+                    val tracksJSON = resp.getJSONArray("tracks")
+                    val commentsJSON = resp.getJSONArray("comments")
+                    val trackList: MutableList<Track> = mutableListOf<Track>()
+                    for(track in 0..tracksJSON.length() - 1){
+                        var id = (tracksJSON.get(track) as JSONObject).getInt("id")
+                        var name =(tracksJSON.get(track) as JSONObject).getString("name")
+                        var duration =(tracksJSON.get(track) as JSONObject).getString("duration")
+                        var localTrack = Track(id, name, duration)
+                        trackList.add(localTrack)
+                    }
+                    val commentList: MutableList<Comment> = mutableListOf<Comment>()
+                    for(comment in 0..commentsJSON.length() - 1){
+                        var id = (commentsJSON.get(comment) as JSONObject).getInt("id")
+                        var name =(commentsJSON.get(comment) as JSONObject).getString("description")
+                        var rating =(commentsJSON.get(comment) as JSONObject).getInt("rating")
+                        var localComment = Comment(id, name, rating)
+                        commentList.add(localComment)
+                    }
+
+                    onComplete(AlbumDetail(id, name, cover, releaseDate, description, genre, recordLabel, trackList, commentList))
                 },
                 Response.ErrorListener {
                     onError(it)

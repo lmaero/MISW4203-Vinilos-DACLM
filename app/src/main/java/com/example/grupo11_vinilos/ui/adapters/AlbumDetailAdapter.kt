@@ -10,7 +10,7 @@ import com.example.grupo11_vinilos.databinding.AlbumDetailItemBinding
 import com.example.grupo11_vinilos.models.AlbumDetail
 
 class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailViewHolder>() {
-    var albumDetail: AlbumDetail = AlbumDetail(100, "", "", "", "", "", "", "", "", "")
+    var albumDetail: AlbumDetail = AlbumDetail(100, "", "", "", "", "", "")
         set(value) {
             field = value
             notifyDataSetChanged()
