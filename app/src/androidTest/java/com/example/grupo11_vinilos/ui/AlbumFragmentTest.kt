@@ -1,6 +1,7 @@
 package com.example.grupo11_vinilos.ui
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -39,5 +40,25 @@ class AlbumFragmentTest {
     @Test
     fun cover_album_is_displayed() {
         onView(allOf(withId(R.id.albumCover), isCompletelyDisplayed()))
+    }
+
+    @Test
+    fun button_musicians_is_enabled() {
+        onView(withId(R.id.navButtonMusicians)).check(ViewAssertions.matches(isEnabled()))
+    }
+
+    @Test
+    fun button_albums_is_enabled() {
+        onView(withId(R.id.navButtonAlbums)).check(ViewAssertions.matches(isEnabled()))
+    }
+
+    @Test
+    fun button_musicians_is_displayed() {
+        onView(withId(R.id.navButtonMusicians)).check(ViewAssertions.matches(isDisplayed()))
+    }
+
+    @Test
+    fun button_albums_is_displayed() {
+        onView(withId(R.id.navButtonAlbums)).check(ViewAssertions.matches(isDisplayed()))
     }
 }
