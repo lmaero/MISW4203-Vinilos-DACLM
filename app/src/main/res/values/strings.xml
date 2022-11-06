@@ -1,0 +1,11 @@
+<resources>
+    <string name="appName">Vinilos App</string>
+    <string name="actionSettings">Settings</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="navButtonAlbums">Álbumes</string>
+    <string name="navButtonMusicians">Artistas</string>
+
+    <string name="titleAlbums">Álbumes</string>
+    <string name="titleMusicians">Artistas</string>
+</resources>
