@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_albumFragment_to_albumDetailFragment"
             app:destination="@id/albumDetailFragment" />
+        <action
+            android:id="@+id/action_albumFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+        <action
+            android:id="@+id/action_albumFragment_to_musiciansFragment"
+            app:destination="@id/musiciansFragment" />
     </fragment>
 
     <fragment
@@ -24,4 +30,10 @@
             android:name="albumId"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/musiciansFragment"
+        android:name="com.example.grupo11_vinilos.MusiciansFragment"
+        android:label="fragment_musicians"
+        tools:layout="@layout/fragment_musicians" />
 </navigation>

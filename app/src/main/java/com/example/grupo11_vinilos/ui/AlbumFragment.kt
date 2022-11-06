@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
@@ -30,6 +32,15 @@ class AlbumFragment : Fragment() {
     ): View {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        view.findViewById<Button>(R.id.navButtonAlbums).setOnClickListener {
+            findNavController().navigate(R.id.action_albumFragment_to_albumFragment)
+        }
+
+        view.findViewById<Button>(R.id.navButtonMusicians).setOnClickListener {
+            findNavController().navigate(R.id.action_albumFragment_to_musiciansFragment)
+        }
+
         viewModelAdapter = AlbumsAdapter()
         return view
     }
