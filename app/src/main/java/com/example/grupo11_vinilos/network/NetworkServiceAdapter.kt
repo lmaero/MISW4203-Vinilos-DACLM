@@ -33,12 +33,12 @@ class NetworkServiceAdapter constructor(context: Context) {
     fun getAlbums(onComplete: (resp: List<Album>) -> Unit, onError: (error: VolleyError) -> Unit) {
         requestQueue.add(
             getRequest("albums",
-                Response.Listener<String> { response ->
+                { response ->
                     val resp = JSONArray(response)
                     val list = mutableListOf<Album>()
                     for (i in 0 until resp.length()) {
                         val item = resp.getJSONObject(i)
-                        var performer =
+                        val performer =
                             item.getString("performers").substring(19, 100).substringBefore(",")
                                 .substringBefore("\"")
                         list.add(
@@ -57,7 +57,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     }
                     onComplete(list)
                 },
-                Response.ErrorListener {
+                {
                     onError(it)
                 })
         )
@@ -70,10 +70,10 @@ class NetworkServiceAdapter constructor(context: Context) {
     ) {
         requestQueue.add(
             getRequest("albums/$albumId",
-                Response.Listener<String> { response ->
+                { response ->
                     val resp = JSONObject(response)
                     val id = resp.getInt("id")
-                    val name = resp.getString("name")
+                    val albumName = resp.getString("name")
                     val cover = resp.getString("cover")
                     val releaseDate = resp.getString("releaseDate").substring(0, 4)
                     val description = resp.getString("description")
@@ -84,34 +84,34 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val performersJSON = resp.getJSONArray("performers")
 
                     val trackList: MutableList<Track> = mutableListOf<Track>()
-                    for (track in 0..tracksJSON.length() - 1) {
-                        var id = (tracksJSON.get(track) as JSONObject).getInt("id")
-                        var name = (tracksJSON.get(track) as JSONObject).getString("name")
-                        var duration = (tracksJSON.get(track) as JSONObject).getString("duration")
-                        var localTrack = Track(id, name, duration)
+                    for (track in 0 until tracksJSON.length()) {
+                        val trackId = (tracksJSON.get(track) as JSONObject).getInt("id")
+                        val trackName = (tracksJSON.get(track) as JSONObject).getString("name")
+                        val duration = (tracksJSON.get(track) as JSONObject).getString("duration")
+                        val localTrack = Track(trackId, trackName, duration)
                         trackList.add(localTrack)
                     }
                     val commentList: MutableList<Comment> = mutableListOf<Comment>()
-                    for (comment in 0..commentsJSON.length() - 1) {
-                        var id = (commentsJSON.get(comment) as JSONObject).getInt("id")
-                        var name =
+                    for (comment in 0 until commentsJSON.length()) {
+                        val commentId = (commentsJSON.get(comment) as JSONObject).getInt("id")
+                        val commentName =
                             (commentsJSON.get(comment) as JSONObject).getString("description")
-                        var rating = (commentsJSON.get(comment) as JSONObject).getInt("rating")
-                        var localComment = Comment(id, name, rating)
+                        val rating = (commentsJSON.get(comment) as JSONObject).getInt("rating")
+                        val localComment = Comment(commentId, commentName, rating)
                         commentList.add(localComment)
                     }
-                    var performerName: String = ""
-                    for (perfomer in 0..performersJSON.length() - 1) {
+                    var performerName = ""
+                    for (performer in 0 until performersJSON.length()) {
                         performerName =
-                            (performersJSON.get(perfomer) as JSONObject).getString("name")
-                        if (perfomer.equals(0)) {
+                            (performersJSON.get(performer) as JSONObject).getString("name")
+                        if (performer == 0) {
                             break
                         }
                     }
                     onComplete(
                         AlbumDetail(
                             id,
-                            name,
+                            albumName,
                             cover,
                             releaseDate,
                             description,
@@ -123,7 +123,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                         )
                     )
                 },
-                Response.ErrorListener {
+                {
                     onError(it)
                 })
         )

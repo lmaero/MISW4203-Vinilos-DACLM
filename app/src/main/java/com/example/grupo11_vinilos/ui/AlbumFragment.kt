@@ -1,20 +1,16 @@
 package com.example.grupo11_vinilos.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.AlbumFragmentBinding
-import com.example.grupo11_vinilos.databinding.AlbumItemBinding
-import com.example.grupo11_vinilos.models.Album
 import com.example.grupo11_vinilos.ui.adapters.AlbumsAdapter
 import com.example.grupo11_vinilos.viewmodels.AlbumViewModel
 
@@ -31,7 +27,7 @@ class AlbumFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumsAdapter()
@@ -44,6 +40,7 @@ class AlbumFragment : Fragment() {
         recyclerView.adapter = viewModelAdapter
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
@@ -54,18 +51,18 @@ class AlbumFragment : Fragment() {
             this,
             AlbumViewModel.Factory(activity.application)
         ).get(AlbumViewModel::class.java)
-        viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
+        viewModel.albums.observe(viewLifecycleOwner) {
             it.apply {
                 viewModelAdapter!!.albums = this
             }
             val imageURLs = it.map { it.cover }
             println(imageURLs)
-        })
+        }
         viewModel.eventNetworkError.observe(
-            viewLifecycleOwner,
-            Observer<Boolean> { isNetworkError ->
-                if (isNetworkError) onNetworkError()
-            })
+            viewLifecycleOwner
+        ) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
     }
 
     override fun onDestroyView() {
