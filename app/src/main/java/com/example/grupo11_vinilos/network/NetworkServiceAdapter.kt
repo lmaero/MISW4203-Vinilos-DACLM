@@ -7,10 +7,7 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.grupo11_vinilos.models.Album
-import com.example.grupo11_vinilos.models.AlbumDetail
-import com.example.grupo11_vinilos.models.Comment
-import com.example.grupo11_vinilos.models.Track
+import com.example.grupo11_vinilos.models.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -128,6 +125,34 @@ class NetworkServiceAdapter constructor(context: Context) {
                 })
         )
     }
+
+    fun getMusicians(onComplete: (resp: List<Musician>) -> Unit, onError: (error: VolleyError) -> Unit) {
+        requestQueue.add(
+            getRequest("musicians",
+                { response ->
+                    val resp = JSONArray(response)
+                    val list = mutableListOf<Musician>()
+                    for (i in 0 until resp.length()) {
+                        val item = resp.getJSONObject(i)
+                        list.add(
+                            i,
+                            Musician(
+                                perfomerId = item.getInt("id"),
+                                name = item.getString("name"),
+                                image = item.getString("image"),
+                                description = item.getString("description"),
+                                birthDate = item.getString("genre")
+                            )
+                        )
+                    }
+                    onComplete(list)
+                },
+                {
+                    onError(it)
+                })
+        )
+    }
+
 
     private fun getRequest(
         path: String,
