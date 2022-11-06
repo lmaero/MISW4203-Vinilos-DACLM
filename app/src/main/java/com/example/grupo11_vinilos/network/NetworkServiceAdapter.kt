@@ -1,7 +1,6 @@
 package com.example.grupo11_vinilos.network
 
 import android.content.Context
-import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -72,12 +71,11 @@ class NetworkServiceAdapter constructor(context: Context) {
         requestQueue.add(
             getRequest("albums/$albumId",
                 Response.Listener<String> { response ->
-                    //val resp = JSONArray(response)
                     val resp = JSONObject(response)
                     val id = resp.getInt("id")
                     val name = resp.getString("name")
                     val cover = resp.getString("cover")
-                    val releaseDate = resp.getString("releaseDate")
+                    val releaseDate = resp.getString("releaseDate").substring(0, 4)
                     val description = resp.getString("description")
                     val genre = resp.getString("genre")
                     val recordLabel = resp.getString("recordLabel")
@@ -86,27 +84,44 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val performersJSON = resp.getJSONArray("performers")
 
                     val trackList: MutableList<Track> = mutableListOf<Track>()
-                    for( track in 0..tracksJSON.length() - 1 ){
+                    for (track in 0..tracksJSON.length() - 1) {
                         var id = (tracksJSON.get(track) as JSONObject).getInt("id")
-                        var name =(tracksJSON.get(track) as JSONObject).getString("name")
-                        var duration =(tracksJSON.get(track) as JSONObject).getString("duration")
+                        var name = (tracksJSON.get(track) as JSONObject).getString("name")
+                        var duration = (tracksJSON.get(track) as JSONObject).getString("duration")
                         var localTrack = Track(id, name, duration)
                         trackList.add(localTrack)
                     }
                     val commentList: MutableList<Comment> = mutableListOf<Comment>()
-                    for( comment in 0..commentsJSON.length() - 1 ){
+                    for (comment in 0..commentsJSON.length() - 1) {
                         var id = (commentsJSON.get(comment) as JSONObject).getInt("id")
-                        var name =(commentsJSON.get(comment) as JSONObject).getString("description")
-                        var rating =(commentsJSON.get(comment) as JSONObject).getInt("rating")
+                        var name =
+                            (commentsJSON.get(comment) as JSONObject).getString("description")
+                        var rating = (commentsJSON.get(comment) as JSONObject).getInt("rating")
                         var localComment = Comment(id, name, rating)
                         commentList.add(localComment)
                     }
                     var performerName: String = ""
-                    for( perfomer in 0..performersJSON.length() - 1 ){
-                        performerName =(performersJSON.get(perfomer) as JSONObject).getString("name")
-                        if(perfomer.equals(0)){ break }
+                    for (perfomer in 0..performersJSON.length() - 1) {
+                        performerName =
+                            (performersJSON.get(perfomer) as JSONObject).getString("name")
+                        if (perfomer.equals(0)) {
+                            break
+                        }
                     }
-                    onComplete(AlbumDetail(id, name, cover, releaseDate, description, genre, recordLabel, trackList, commentList, performerName))
+                    onComplete(
+                        AlbumDetail(
+                            id,
+                            name,
+                            cover,
+                            releaseDate,
+                            description,
+                            genre,
+                            recordLabel,
+                            trackList,
+                            commentList,
+                            performerName
+                        )
+                    )
                 },
                 Response.ErrorListener {
                     onError(it)
