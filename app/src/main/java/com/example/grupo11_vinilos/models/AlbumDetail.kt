@@ -1,6 +1,6 @@
 package com.example.grupo11_vinilos.models
 
-data class Album(
+data class AlbumDetail(
     val albumId: Int,
     val name: String,
     val cover: String,
@@ -8,5 +8,7 @@ data class Album(
     val description: String,
     val genre: String,
     val recordLabel: String,
-    val performers: String
+    var tracks: MutableList<Track> = mutableListOf<Track>(),
+    var comments: MutableList<Comment> = mutableListOf<Comment>(),
+    var performers: String
 )
