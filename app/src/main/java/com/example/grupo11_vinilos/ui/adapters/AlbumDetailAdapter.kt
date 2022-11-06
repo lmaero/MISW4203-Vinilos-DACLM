@@ -8,9 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.AlbumDetailItemBinding
 import com.example.grupo11_vinilos.models.AlbumDetail
+import com.example.grupo11_vinilos.models.Comment
+import com.example.grupo11_vinilos.models.Track
 
 class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailViewHolder>() {
-    var albumDetail: AlbumDetail = AlbumDetail(100, "", "", "", "", "", "")
+    var tracksList: MutableList<Track> = mutableListOf<Track>()
+    var commentsList: MutableList<Comment> = mutableListOf<Comment>()
+    var albumDetail: AlbumDetail = AlbumDetail(100, "", "", "", "", "", "", tracksList, commentsList, "")
         set(value) {
             field = value
             notifyDataSetChanged()

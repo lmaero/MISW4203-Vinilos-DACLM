@@ -83,8 +83,10 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val recordLabel = resp.getString("recordLabel")
                     val tracksJSON = resp.getJSONArray("tracks")
                     val commentsJSON = resp.getJSONArray("comments")
+                    val performersJSON = resp.getJSONArray("performers")
+
                     val trackList: MutableList<Track> = mutableListOf<Track>()
-                    for(track in 0..tracksJSON.length() - 1){
+                    for( track in 0..tracksJSON.length() - 1 ){
                         var id = (tracksJSON.get(track) as JSONObject).getInt("id")
                         var name =(tracksJSON.get(track) as JSONObject).getString("name")
                         var duration =(tracksJSON.get(track) as JSONObject).getString("duration")
@@ -92,15 +94,19 @@ class NetworkServiceAdapter constructor(context: Context) {
                         trackList.add(localTrack)
                     }
                     val commentList: MutableList<Comment> = mutableListOf<Comment>()
-                    for(comment in 0..commentsJSON.length() - 1){
+                    for( comment in 0..commentsJSON.length() - 1 ){
                         var id = (commentsJSON.get(comment) as JSONObject).getInt("id")
                         var name =(commentsJSON.get(comment) as JSONObject).getString("description")
                         var rating =(commentsJSON.get(comment) as JSONObject).getInt("rating")
                         var localComment = Comment(id, name, rating)
                         commentList.add(localComment)
                     }
-
-                    onComplete(AlbumDetail(id, name, cover, releaseDate, description, genre, recordLabel, trackList, commentList))
+                    var performerName: String = ""
+                    for( perfomer in 0..performersJSON.length() - 1 ){
+                        performerName =(performersJSON.get(perfomer) as JSONObject).getString("name")
+                        if(perfomer.equals(0)){ break }
+                    }
+                    onComplete(AlbumDetail(id, name, cover, releaseDate, description, genre, recordLabel, trackList, commentList, performerName))
                 },
                 Response.ErrorListener {
                     onError(it)
