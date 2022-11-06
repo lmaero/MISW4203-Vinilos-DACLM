@@ -1,11 +1,11 @@
 package com.example.grupo11_vinilos.ui
 
-import com.example.grupo11_vinilos.R
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import com.example.grupo11_vinilos.R
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -14,8 +14,9 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-public class AlbumFragmentTest {
-    @Rule @JvmField
+class AlbumFragmentTest {
+    @Rule
+    @JvmField
     var activityRule = ActivityScenarioRule<MainActivity>(
         MainActivity::class.java
     )
