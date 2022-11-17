@@ -52,8 +52,7 @@ class CollectorDetailFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        //activity.actionBar?.title = getString(R.string.titleCollectors)
-        activity.actionBar?.title = "Alonso Poderoso"
+        activity.actionBar?.title = getString(R.string.titleCollectors)
         val args: CollectorDetailFragmentArgs by navArgs()
 
         viewModel = ViewModelProvider(
