@@ -5,7 +5,8 @@ import androidx.lifecycle.*
 import com.example.grupo11_vinilos.models.MusicianDetail
 import com.example.grupo11_vinilos.repositories.MusicianDetailRepository
 
-class MusicianDetailViewModel(application: Application, musicianId: Int) : AndroidViewModel(application) {
+class MusicianDetailViewModel(application: Application, musicianId: Int) :
+    AndroidViewModel(application) {
 
     private val musicianDetailRepository = MusicianDetailRepository(application)
 

@@ -12,13 +12,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
-import com.example.grupo11_vinilos.databinding.AlbumDetailFragmentBinding
 import com.example.grupo11_vinilos.databinding.CollectorDetailFragmentBinding
-import com.example.grupo11_vinilos.models.AlbumDetail
 import com.example.grupo11_vinilos.models.CollectorDetail
-import com.example.grupo11_vinilos.ui.adapters.AlbumDetailAdapter
 import com.example.grupo11_vinilos.ui.adapters.CollectorDetailAdapter
-import com.example.grupo11_vinilos.viewmodels.AlbumDetailViewModel
 import com.example.grupo11_vinilos.viewmodels.CollectorDetailViewModel
 
 /**

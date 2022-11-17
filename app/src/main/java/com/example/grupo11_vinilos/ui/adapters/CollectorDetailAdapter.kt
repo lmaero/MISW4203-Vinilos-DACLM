@@ -6,11 +6,11 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
-import com.example.grupo11_vinilos.databinding.AlbumDetailItemBinding
 import com.example.grupo11_vinilos.databinding.CollectorDetailItemBinding
-import com.example.grupo11_vinilos.models.*
+import com.example.grupo11_vinilos.models.CollectorDetail
 
-class CollectorDetailAdapter : RecyclerView.Adapter<CollectorDetailAdapter.CollectorDetailViewHolder>() {
+class CollectorDetailAdapter :
+    RecyclerView.Adapter<CollectorDetailAdapter.CollectorDetailViewHolder>() {
     var collectorDetail: CollectorDetail = CollectorDetail(100, "", "", "")
         set(value) {
             field = value

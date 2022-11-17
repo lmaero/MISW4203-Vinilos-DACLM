@@ -11,10 +11,11 @@ import com.example.grupo11_vinilos.models.Album
 import com.example.grupo11_vinilos.models.MusicianDetail
 
 
-class MusicianDetailAdapter : RecyclerView.Adapter<MusicianDetailAdapter.MusicianDetailViewHolder>() {
+class MusicianDetailAdapter :
+    RecyclerView.Adapter<MusicianDetailAdapter.MusicianDetailViewHolder>() {
     var albumsList: MutableList<Album> = mutableListOf<Album>()
     var musicianDetail: MusicianDetail =
-        MusicianDetail(100, "", "", "", "",albumsList)
+        MusicianDetail(100, "", "", "", "", albumsList)
         set(value) {
 
             field = value

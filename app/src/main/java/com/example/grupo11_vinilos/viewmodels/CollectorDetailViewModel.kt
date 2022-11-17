@@ -2,12 +2,11 @@ package com.example.grupo11_vinilos.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.grupo11_vinilos.models.AlbumDetail
 import com.example.grupo11_vinilos.models.CollectorDetail
-import com.example.grupo11_vinilos.repositories.AlbumDetailRepository
 import com.example.grupo11_vinilos.repositories.CollectorDetailRepository
 
-class CollectorDetailViewModel(application: Application, collectorId: Int) : AndroidViewModel(application) {
+class CollectorDetailViewModel(application: Application, collectorId: Int) :
+    AndroidViewModel(application) {
 
     private val collectorDetailRepository = CollectorDetailRepository(application)
 

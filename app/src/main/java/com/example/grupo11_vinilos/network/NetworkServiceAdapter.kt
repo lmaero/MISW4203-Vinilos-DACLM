@@ -177,14 +177,23 @@ class NetworkServiceAdapter constructor(context: Context) {
                         val albumId = (albumsJSON.get(albums) as JSONObject).getInt("id")
                         val albumName = (albumsJSON.get(albums) as JSONObject).getString("name")
                         val albumCover = (albumsJSON.get(albums) as JSONObject).getString("cover")
-                        val albumDescription = (albumsJSON.get(albums) as JSONObject).getString("description")
+                        val albumDescription =
+                            (albumsJSON.get(albums) as JSONObject).getString("description")
                         val albumGenre = (albumsJSON.get(albums) as JSONObject).getString("genre")
-                        val albumRecordLabel = (albumsJSON.get(albums) as JSONObject).getString("recordLabel")
+                        val albumRecordLabel =
+                            (albumsJSON.get(albums) as JSONObject).getString("recordLabel")
 
 
-
-
-                        val localAlbum = Album(albumId, albumName, albumCover, albumDescription, albumGenre, albumRecordLabel,"","")
+                        val localAlbum = Album(
+                            albumId,
+                            albumName,
+                            albumCover,
+                            albumDescription,
+                            albumGenre,
+                            albumRecordLabel,
+                            "",
+                            ""
+                        )
                         albumList.add(localAlbum)
                     }
 

@@ -33,7 +33,7 @@ class MusiciansAdapter : RecyclerView.Adapter<MusiciansAdapter.MusicianViewHolde
         holder.viewDataBinding.also {
             it.musician = musicians[position]
         }
-         holder.viewDataBinding.root.setOnClickListener {
+        holder.viewDataBinding.root.setOnClickListener {
             val action =
                 MusicianFragmentDirections.actionMusicianFragmentToMusicianDetailFragment(musicians[position].musicianId)
             holder.viewDataBinding.root.findNavController().navigate(action)
