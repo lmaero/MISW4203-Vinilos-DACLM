@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.AlbumFragment">
+    tools:context=".ui.CollectorFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,9 +13,22 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/navButtonMusicians"
+            android:id="@+id/navButtonAlbums"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif"
+            android:text="@string/navButtonAlbums"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textScaleX="0.75"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/navButtonMusicians"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:fontFamily="sans-serif"
             android:text="@string/navButtonMusicians"
@@ -24,25 +37,12 @@
             android:textScaleX="0.75"
             android:textSize="20sp"
             android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/navButtonCollectors"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:fontFamily="sans-serif"
-            android:text="@string/navButtonCollectors"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textScaleX="0.75"
-            android:textSize="20sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/albumsRv"
+        android:id="@+id/collectorsRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/album_item" />
+        tools:listitem="@layout/collector_item" />
 
 </LinearLayout>

@@ -14,7 +14,8 @@ import com.example.grupo11_vinilos.models.Track
 class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailViewHolder>() {
     var tracksList: MutableList<Track> = mutableListOf<Track>()
     var commentsList: MutableList<Comment> = mutableListOf<Comment>()
-    var albumDetail: AlbumDetail = AlbumDetail(100, "", "", "", "", "", "", tracksList, commentsList, "")
+    var albumDetail: AlbumDetail =
+        AlbumDetail(100, "", "", "", "", "", "", tracksList, commentsList, "")
         set(value) {
             field = value
             notifyDataSetChanged()

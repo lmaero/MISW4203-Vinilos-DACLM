@@ -8,20 +8,52 @@
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.grupo11_vinilos.ui.AlbumFragment"
-        android:label="album_fragment"
+        android:label="Álbumes"
         tools:layout="@layout/album_fragment">
         <action
             android:id="@+id/action_albumFragment_to_albumDetailFragment"
             app:destination="@id/albumDetailFragment" />
+        <action
+            android:id="@+id/action_albumFragment_to_musicianFragment"
+            app:destination="@id/musicianFragment" />
+        <action
+            android:id="@+id/action_albumFragment_to_collectorFragment"
+            app:destination="@id/collectorFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/albumDetailFragment"
         android:name="com.example.grupo11_vinilos.ui.AlbumDetailFragment"
-        android:label="album_detail_fragment"
+        android:label="Detalle"
         tools:layout="@layout/album_detail_fragment">
         <argument
             android:name="albumId"
             app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/musicianFragment"
+        android:name="com.example.grupo11_vinilos.ui.MusicianFragment"
+        android:label="Artistas"
+        tools:layout="@layout/musician_fragment">
+        <action
+            android:id="@+id/action_musicianFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+        <action
+            android:id="@+id/action_musicianFragment_to_collectorFragment"
+            app:destination="@id/collectorFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/collectorFragment"
+        android:name="com.example.grupo11_vinilos.ui.CollectorFragment"
+        android:label="Coleccionistas"
+        tools:layout="@layout/collector_fragment">
+        <action
+            android:id="@+id/action_collectorFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+        <action
+            android:id="@+id/action_collectorFragment_to_musicianFragment"
+            app:destination="@id/musicianFragment" />
     </fragment>
 </navigation>

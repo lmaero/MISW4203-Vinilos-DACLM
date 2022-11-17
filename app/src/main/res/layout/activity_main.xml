@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif"
-            android:text="@string/app_name"
+            android:text="@string/appName"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:typeface="normal" />
@@ -27,12 +27,16 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/mainToolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="?attr/colorPrimary"
-            android:elevation="2dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold"
             android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            android:typeface="normal"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextAppearance="@style/Toolbar.TitleText" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"

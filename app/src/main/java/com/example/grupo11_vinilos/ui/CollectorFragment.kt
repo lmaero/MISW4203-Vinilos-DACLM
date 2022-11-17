@@ -4,67 +4,74 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
-import com.example.grupo11_vinilos.databinding.AlbumDetailFragmentBinding
-import com.example.grupo11_vinilos.models.AlbumDetail
-import com.example.grupo11_vinilos.ui.adapters.AlbumDetailAdapter
-import com.example.grupo11_vinilos.viewmodels.AlbumDetailViewModel
+import com.example.grupo11_vinilos.databinding.CollectorFragmentBinding
+import com.example.grupo11_vinilos.ui.adapters.CollectorsAdapter
+import com.example.grupo11_vinilos.viewmodels.CollectorViewModel
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class AlbumDetailFragment : Fragment() {
-    private var _binding: AlbumDetailFragmentBinding? = null
+class CollectorFragment : Fragment() {
+    private var _binding: CollectorFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewModel: AlbumDetailViewModel
-    private var viewModelAdapter: AlbumDetailAdapter? = null
+    private lateinit var viewModel: CollectorViewModel
+    private var viewModelAdapter: CollectorsAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = AlbumDetailFragmentBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = CollectorFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = AlbumDetailAdapter()
+
+        view.findViewById<Button>(R.id.navButtonAlbums).setOnClickListener {
+            findNavController().navigate(R.id.action_collectorFragment_to_albumFragment)
+        }
+
+        view.findViewById<Button>(R.id.navButtonMusicians).setOnClickListener {
+            findNavController().navigate(R.id.action_collectorFragment_to_musicianFragment)
+        }
+
+        viewModelAdapter = CollectorsAdapter()
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = binding.albumDetailRv
+        recyclerView = binding.collectorsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = getString(R.string.titleAlbums)
-        val args: AlbumDetailFragmentArgs by navArgs()
-
+        activity.actionBar?.title = getString(R.string.titleCollectors)
         viewModel = ViewModelProvider(
             this,
-            AlbumDetailViewModel.Factory(activity.application, args.albumId)
-        ).get(AlbumDetailViewModel::class.java)
-        viewModel.albumDetail.observe(viewLifecycleOwner, Observer<AlbumDetail> {
+            CollectorViewModel.Factory(activity.application)
+        ).get(CollectorViewModel::class.java)
+        viewModel.collectors.observe(viewLifecycleOwner) {
             it.apply {
-                viewModelAdapter!!.albumDetail = this
+                viewModelAdapter!!.collectors = this
             }
-        })
+        }
         viewModel.eventNetworkError.observe(
-            viewLifecycleOwner,
-            Observer<Boolean> { isNetworkError ->
-                if (isNetworkError) onNetworkError()
-            })
+            viewLifecycleOwner
+        ) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
     }
 
     override fun onDestroyView() {

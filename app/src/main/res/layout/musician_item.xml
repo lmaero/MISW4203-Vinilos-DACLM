@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="album"
-            type="com.example.grupo11_vinilos.models.Album" />
+            name="musician"
+            type="com.example.grupo11_vinilos.models.Musician" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,12 +27,12 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/albumCover"
+                    android:id="@+id/musicianPortrait"
                     android:layout_width="100dp"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="10dp"
-                    android:contentDescription="@{album.name}"
-                    app:imageUrl="@{album.cover}" />
+                    android:contentDescription="@{musician.name}"
+                    app:imageUrl="@{musician.image}" />
 
                 <LinearLayout
                     android:layout_width="300dp"
@@ -41,35 +41,24 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/albumTitle"
-                        android:layout_width="match_parent"
+                        android:id="@+id/musicianName"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:fontFamily="sans-serif"
-                        android:text="@{album.name}"
+                        android:text="@{musician.name}"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:typeface="normal" />
 
                     <TextView
-                        android:id="@+id/albumGenre"
+                        android:id="@+id/musicianBirthDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif"
-                        android:text="@{album.performers}"
-                        android:textColor="@color/gray_em"
-                        android:textSize="15sp"
-                        android:typeface="normal" />
-
-                    <TextView
-                        android:id="@+id/albumYear"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="sans-serif"
-                        android:text="@{album.releaseDate.substring(0,4)}"
+                        android:text="@{musician.birthDate.substring(0,4)}"
                         android:textColor="@color/gray_em"
                         android:textSize="15sp"
                         android:typeface="normal" />
