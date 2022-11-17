@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.MusicianItemBinding
 import com.example.grupo11_vinilos.models.Musician
+import com.example.grupo11_vinilos.ui.MusicianFragmentDirections
 
 class MusiciansAdapter : RecyclerView.Adapter<MusiciansAdapter.MusicianViewHolder>() {
 
@@ -31,11 +33,11 @@ class MusiciansAdapter : RecyclerView.Adapter<MusiciansAdapter.MusicianViewHolde
         holder.viewDataBinding.also {
             it.musician = musicians[position]
         }
-        /* holder.viewDataBinding.root.setOnClickListener {
+         holder.viewDataBinding.root.setOnClickListener {
             val action =
                 MusicianFragmentDirections.actionMusicianFragmentToMusicianDetailFragment(musicians[position].musicianId)
             holder.viewDataBinding.root.findNavController().navigate(action)
-        } */
+        }
     }
 
     override fun getItemCount(): Int {
