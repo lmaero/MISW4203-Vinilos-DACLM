@@ -5,7 +5,9 @@
     <!-- Strings used for fragments for navigation -->
     <string name="navButtonAlbums">Álbumes</string>
     <string name="navButtonMusicians">Artistas</string>
+    <string name="navButtonCollectors">Coleccionistas</string>
 
     <string name="titleAlbums">Álbumes</string>
     <string name="titleMusicians">Artistas</string>
+    <string name="titleCollectors">Coleccionistas</string>
 </resources>

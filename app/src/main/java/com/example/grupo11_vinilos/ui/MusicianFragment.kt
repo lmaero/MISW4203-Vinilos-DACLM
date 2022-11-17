@@ -34,11 +34,11 @@ class MusicianFragment : Fragment() {
         val view = binding.root
 
         view.findViewById<Button>(R.id.navButtonAlbums).setOnClickListener {
-            findNavController().navigate(R.id.action_albumFragment_to_albumFragment)
+            findNavController().navigate(R.id.action_musicianFragment_to_albumFragment)
         }
 
-        view.findViewById<Button>(R.id.navButtonMusicians).setOnClickListener {
-            findNavController().navigate(R.id.action_albumFragment_to_musiciansFragment)
+        view.findViewById<Button>(R.id.navButtonCollectors).setOnClickListener {
+            findNavController().navigate(R.id.action_musicianFragment_to_collectorFragment)
         }
 
         viewModelAdapter = MusiciansAdapter()
