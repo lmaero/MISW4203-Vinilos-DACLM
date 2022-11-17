@@ -187,6 +187,28 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
+    fun getCollectorDetail(
+        collectorId: Int,
+        onComplete: (resp: CollectorDetail) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
+        requestQueue.add(
+            getRequest("collectors/$collectorId",
+                { response ->
+                    val resp = JSONObject(response)
+                    val collectorId = resp.getInt("id")
+                    val name = resp.getString("name")
+                    val telephone = resp.getString("telephone")
+                    val email = resp.getString("email")
+
+                    onComplete(CollectorDetail(collectorId, name, telephone, email))
+                },
+                {
+                    onError(it)
+                })
+        )
+    }
+
 
     private fun getRequest(
         path: String,

@@ -55,5 +55,18 @@
         <action
             android:id="@+id/action_collectorFragment_to_musicianFragment"
             app:destination="@id/musicianFragment" />
+        <action
+            android:id="@+id/action_collectorFragment_to_collectorDetailFragment"
+            app:destination="@id/collectorDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/collectorDetailFragment"
+        android:name="com.example.grupo11_vinilos.ui.CollectorDetailFragment"
+        android:label="Detalle"
+        tools:layout="@layout/collector_detail_fragment">
+        <argument
+            android:name="collectorId"
+            app:argType="integer" />
     </fragment>
 </navigation>
