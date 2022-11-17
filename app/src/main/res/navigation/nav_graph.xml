@@ -37,11 +37,24 @@
         android:label="Artistas"
         tools:layout="@layout/musician_fragment">
         <action
+            android:id="@+id/action_musicianFragment_to_musicianDetailFragment"
+            app:destination="@id/musicianDetailFragment" />
+        <action
             android:id="@+id/action_musicianFragment_to_albumFragment"
             app:destination="@id/albumFragment" />
         <action
             android:id="@+id/action_musicianFragment_to_collectorFragment"
             app:destination="@id/collectorFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/musicianDetailFragment"
+        android:name="com.example.grupo11_vinilos.ui.MusicianDetailFragment"
+        android:label="Detalle"
+        tools:layout="@layout/musician_detail_fragment">
+        <argument
+            android:name="musicianId"
+            app:argType="integer" />
     </fragment>
 
     <fragment

@@ -157,6 +157,55 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
+    fun getMusicianDetail(
+        musicianId: Int,
+        onComplete: (resp: MusicianDetail) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
+        requestQueue.add(
+            getRequest("musicians/$musicianId",
+                { response ->
+                    val resp = JSONObject(response)
+                    val id = resp.getInt("id")
+                    val musicianName = resp.getString("name")
+                    val image = resp.getString("image")
+                    val description = resp.getString("description")
+                    val birthDate = resp.getString("birthDate").substring(0, 4)
+                    val albumsJSON = resp.getJSONArray("albums")
+                    val albumList: MutableList<Album> = mutableListOf<Album>()
+                    for (albums in 0 until albumsJSON.length()) {
+                        val albumId = (albumsJSON.get(albums) as JSONObject).getInt("id")
+                        val albumName = (albumsJSON.get(albums) as JSONObject).getString("name")
+                        val albumCover = (albumsJSON.get(albums) as JSONObject).getString("cover")
+                        val albumDescription = (albumsJSON.get(albums) as JSONObject).getString("description")
+                        val albumGenre = (albumsJSON.get(albums) as JSONObject).getString("genre")
+                        val albumRecordLabel = (albumsJSON.get(albums) as JSONObject).getString("recordLabel")
+
+
+
+
+                        val localAlbum = Album(albumId, albumName, albumCover, albumDescription, albumGenre, albumRecordLabel,"","")
+                        albumList.add(localAlbum)
+                    }
+
+                    onComplete(
+                        MusicianDetail(
+                            id,
+                            musicianName,
+                            image,
+                            description,
+                            birthDate,
+                            albumList
+
+                        )
+                    )
+                },
+                {
+                    onError(it)
+                })
+        )
+    }
+
     fun getCollectors(
         onComplete: (resp: List<Collector>) -> Unit,
         onError: (error: VolleyError) -> Unit
