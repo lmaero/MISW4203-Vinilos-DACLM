@@ -29,10 +29,10 @@
                 <ImageView
                     android:id="@+id/musicianPortrait"
                     android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:contentDescription="@{musician.name}"
-                    app:imageUrl="@{musician.image}" />
+                    android:layout_marginVertical="5dp"
+                    android:contentDescription="@{musician.name}" />
 
                 <LinearLayout
                     android:layout_width="300dp"

@@ -29,10 +29,11 @@
                 <ImageView
                     android:id="@+id/albumCover"
                     android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="10dp"
-                    android:contentDescription="@{album.name}"
-                    app:imageUrl="@{album.cover}" />
+                    android:layout_marginVertical="5dp"
+                    android:contentDescription="@{album.name}" />
 
                 <LinearLayout
                     android:layout_width="300dp"
