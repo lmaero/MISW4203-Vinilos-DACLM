@@ -1,6 +1,5 @@
 package com.example.grupo11_vinilos.ui.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -10,7 +9,7 @@ import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.TrackItemBinding
 import com.example.grupo11_vinilos.models.Track
 
-class TrackAdapter : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
+class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TrackViewHolder>() {
 
     var tracks: MutableList<Track> = mutableListOf<Track>()
         set(value) {
