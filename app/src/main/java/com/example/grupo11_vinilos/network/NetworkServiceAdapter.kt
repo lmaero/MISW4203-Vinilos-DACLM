@@ -10,6 +10,9 @@ import com.android.volley.toolbox.Volley
 import com.example.grupo11_vinilos.models.*
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object {
@@ -80,7 +83,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val commentsJSON = resp.getJSONArray("comments")
                     val performersJSON = resp.getJSONArray("performers")
 
-                    val trackList: MutableList<Track> = mutableListOf<Track>()
+                    val trackList: MutableList<Track> = mutableListOf()
                     for (track in 0 until tracksJSON.length()) {
                         val trackId = (tracksJSON.get(track) as JSONObject).getInt("id")
                         val trackName = (tracksJSON.get(track) as JSONObject).getString("name")
@@ -88,7 +91,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                         val localTrack = Track(trackId, trackName, duration)
                         trackList.add(localTrack)
                     }
-                    val commentList: MutableList<Comment> = mutableListOf<Comment>()
+                    val commentList: MutableList<Comment> = mutableListOf()
                     for (comment in 0 until commentsJSON.length()) {
                         val commentId = (commentsJSON.get(comment) as JSONObject).getInt("id")
                         val commentName =
@@ -157,29 +160,104 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
-    fun getCollectors(
-        onComplete: (resp: List<Collector>) -> Unit,
+    fun getMusicianDetail(
+        musicianId: Int,
+        onComplete: (resp: MusicianDetail) -> Unit,
         onError: (error: VolleyError) -> Unit
     ) {
+        requestQueue.add(
+            getRequest("musicians/$musicianId",
+                { response ->
+                    val resp = JSONObject(response)
+                    val id = resp.getInt("id")
+                    val musicianName = resp.getString("name")
+                    val image = resp.getString("image")
+                    val description = resp.getString("description")
+                    val birthDate = resp.getString("birthDate").substring(0, 4)
+                    val albumsJSON = resp.getJSONArray("albums")
+                    val albumList: MutableList<Album> = mutableListOf()
+                    for (albums in 0 until albumsJSON.length()) {
+                        val albumId = (albumsJSON.get(albums) as JSONObject).getInt("id")
+                        val albumName = (albumsJSON.get(albums) as JSONObject).getString("name")
+                        val albumCover = (albumsJSON.get(albums) as JSONObject).getString("cover")
+                        val albumDescription =
+                            (albumsJSON.get(albums) as JSONObject).getString("description")
+                        val albumGenre = (albumsJSON.get(albums) as JSONObject).getString("genre")
+                        val albumRecordLabel =
+                            (albumsJSON.get(albums) as JSONObject).getString("recordLabel")
+
+
+                        val localAlbum = Album(
+                            albumId,
+                            albumName,
+                            albumCover,
+                            albumDescription,
+                            albumGenre,
+                            albumRecordLabel,
+                            "",
+                            ""
+                        )
+                        albumList.add(localAlbum)
+                    }
+
+                    onComplete(
+                        MusicianDetail(
+                            id,
+                            musicianName,
+                            image,
+                            description,
+                            birthDate,
+                            albumList
+
+                        )
+                    )
+                },
+                {
+                    onError(it)
+                })
+        )
+    }
+
+    suspend fun getCollectors() = suspendCoroutine<List<Collector>> { cont ->
         requestQueue.add(
             getRequest("collectors",
                 { response ->
                     val resp = JSONArray(response)
                     val list = mutableListOf<Collector>()
+
                     for (i in 0 until resp.length()) {
                         val item = resp.getJSONObject(i)
-
-                        list.add(
-                            i,
-                            Collector(
-                                collectorId = item.getInt("id"),
-                                name = item.getString("name"),
-                                telephone = item.getString("telephone"),
-                                email = item.getString("email"),
-                            )
+                        val collector = Collector(
+                            collectorId = item.getInt("id"),
+                            name = item.getString("name"),
+                            telephone = item.getString("telephone"),
+                            email = item.getString("email"),
                         )
+
+                        list.add(i, collector)
                     }
-                    onComplete(list)
+                    cont.resume(list)
+                },
+                { cont.resumeWithException(it) })
+        )
+    }
+
+    fun getCollectorDetail(
+        id: Int,
+        onComplete: (resp: CollectorDetail) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
+        requestQueue.add(
+            getRequest(
+                "collectors/$id",
+                { response ->
+                    val resp = JSONObject(response)
+                    val collectorId = resp.getInt("id")
+                    val name = resp.getString("name")
+                    val telephone = resp.getString("telephone")
+                    val email = resp.getString("email")
+
+                    onComplete(CollectorDetail(collectorId, name, telephone, email))
                 },
                 {
                     onError(it)

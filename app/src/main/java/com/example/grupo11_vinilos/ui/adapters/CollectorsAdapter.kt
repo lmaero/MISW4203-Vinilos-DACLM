@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.CollectorItemBinding
 import com.example.grupo11_vinilos.models.Collector
+import com.example.grupo11_vinilos.ui.CollectorFragmentDirections
 
 class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>() {
 
@@ -31,13 +33,13 @@ class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHo
         holder.viewDataBinding.also {
             it.collector = collectors[position]
         }
-        /* holder.viewDataBinding.root.setOnClickListener {
+        holder.viewDataBinding.root.setOnClickListener {
             val action =
                 CollectorFragmentDirections.actionCollectorFragmentToCollectorDetailFragment(
                     collectors[position].collectorId
                 )
             holder.viewDataBinding.root.findNavController().navigate(action)
-        } */
+        }
     }
 
     override fun getItemCount(): Int {
