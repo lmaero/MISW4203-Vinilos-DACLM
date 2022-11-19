@@ -3,31 +3,33 @@
 
     <data>
         <variable
-            name="track"
-            type="com.example.grupo11_vinilos.models.Track" />
+            name="comment"
+            type="com.example.grupo11_vinilos.models.Comment" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="13dp"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/trackTitle"
+            android:id="@+id/commentTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textColor="@color/black"
-            android:text="@{track.name}" />
+            android:textStyle="bold"
+            android:text="@{@string/rating_comment_title + comment.rating}" />
 
         <TextView
-            android:id="@+id/trackDuration"
+            android:id="@+id/commentDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:textSize="14sp"
-            android:text="@{track.duration}" />
+            android:textSize="15sp"
+            android:text="@{comment.description}" />
+
     </LinearLayout>
 </layout>

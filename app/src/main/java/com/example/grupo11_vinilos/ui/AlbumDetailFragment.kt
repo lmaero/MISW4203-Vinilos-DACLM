@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.AlbumDetailFragmentBinding
-import com.example.grupo11_vinilos.models.AlbumDetail
 import com.example.grupo11_vinilos.ui.adapters.AlbumDetailAdapter
-import com.example.grupo11_vinilos.ui.adapters.TrackAdapter
+import com.example.grupo11_vinilos.ui.adapters.CommentsAdapter
+import com.example.grupo11_vinilos.ui.adapters.TracksAdapter
 import com.example.grupo11_vinilos.viewmodels.AlbumDetailViewModel
 import com.google.android.material.card.MaterialCardView
 
@@ -28,7 +29,8 @@ class AlbumDetailFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumDetailViewModel
     private var viewModelAdapter: AlbumDetailAdapter? = null
-    private var tracksViewModelAdapter: TrackAdapter? = null
+    private var tracksViewModelAdapter: TracksAdapter? = null
+    private var commentsViewModelAdapter: CommentsAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +39,8 @@ class AlbumDetailFragment : Fragment() {
         _binding = AlbumDetailFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumDetailAdapter()
-        tracksViewModelAdapter = TrackAdapter()
+        tracksViewModelAdapter = TracksAdapter()
+        commentsViewModelAdapter = CommentsAdapter()
         return view
     }
 
@@ -67,6 +70,14 @@ class AlbumDetailFragment : Fragment() {
                     binding.tracks.layoutManager = LinearLayoutManager(context)
                     binding.tracks.adapter = tracksViewModelAdapter
                     view?.findViewById<MaterialCardView>(R.id.tracksCardView)?.visibility = View.VISIBLE;
+                    view?.findViewById<TextView>(R.id.tracksTitleCardView)?.visibility = View.VISIBLE;
+                }
+                if (this.comments.size > 0) {
+                    commentsViewModelAdapter!!.comments = this.comments
+                    binding.comments.layoutManager = LinearLayoutManager(context)
+                    binding.comments.adapter = commentsViewModelAdapter
+                    view?.findViewById<MaterialCardView>(R.id.commentsCardView)?.visibility = View.VISIBLE;
+                    view?.findViewById<TextView>(R.id.commentsTitleCardView)?.visibility = View.VISIBLE;
                 }
             }
         }
