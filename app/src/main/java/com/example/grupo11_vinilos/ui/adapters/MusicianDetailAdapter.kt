@@ -7,6 +7,7 @@ import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.MusicianDetailItemBinding
@@ -60,6 +61,7 @@ class MusicianDetailAdapter :
                 .apply(
                     RequestOptions()
                         .placeholder(R.drawable.loading_animation)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .error(R.drawable.ic_broken_image)
                 )
                 .into(viewDataBinding.musicianDetailImage)
