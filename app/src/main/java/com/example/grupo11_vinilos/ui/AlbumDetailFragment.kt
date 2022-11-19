@@ -15,7 +15,9 @@ import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.AlbumDetailFragmentBinding
 import com.example.grupo11_vinilos.models.AlbumDetail
 import com.example.grupo11_vinilos.ui.adapters.AlbumDetailAdapter
+import com.example.grupo11_vinilos.ui.adapters.TrackAdapter
 import com.example.grupo11_vinilos.viewmodels.AlbumDetailViewModel
+import com.google.android.material.card.MaterialCardView
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -26,6 +28,7 @@ class AlbumDetailFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumDetailViewModel
     private var viewModelAdapter: AlbumDetailAdapter? = null
+    private var tracksViewModelAdapter: TrackAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +37,7 @@ class AlbumDetailFragment : Fragment() {
         _binding = AlbumDetailFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumDetailAdapter()
+        tracksViewModelAdapter = TrackAdapter()
         return view
     }
 
@@ -49,17 +53,23 @@ class AlbumDetailFragment : Fragment() {
             "You can only access the viewModel after onActivityCreated()"
         }
         activity.actionBar?.title = getString(R.string.titleAlbums)
-        val args: AlbumDetailFragmentArgs by navArgs()
+        val args: AlbumDetailFragmentArgs by this.navArgs()
 
         viewModel = ViewModelProvider(
             this,
             AlbumDetailViewModel.Factory(activity.application, args.albumId)
         ).get(AlbumDetailViewModel::class.java)
-        viewModel.albumDetail.observe(viewLifecycleOwner, Observer<AlbumDetail> {
+        viewModel.albumDetail.observe(viewLifecycleOwner) {
             it.apply {
                 viewModelAdapter!!.albumDetail = this
+                if (this.tracks.size > 0) {
+                    tracksViewModelAdapter!!.tracks = this.tracks
+                    binding.tracks.layoutManager = LinearLayoutManager(context)
+                    binding.tracks.adapter = tracksViewModelAdapter
+                    view?.findViewById<MaterialCardView>(R.id.tracksCardView)?.visibility = View.VISIBLE;
+                }
             }
-        })
+        }
         viewModel.eventNetworkError.observe(
             viewLifecycleOwner,
             Observer<Boolean> { isNetworkError ->
