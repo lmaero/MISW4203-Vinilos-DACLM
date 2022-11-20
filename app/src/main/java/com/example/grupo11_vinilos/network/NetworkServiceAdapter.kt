@@ -64,11 +64,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
-    fun getAlbumDetail(
-        albumId: Int,
-        onComplete: (resp: AlbumDetail) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
+    suspend fun getAlbumDetail(albumId: Int) = suspendCoroutine<AlbumDetail> { cont ->
         requestQueue.add(
             getRequest("albums/$albumId",
                 { response ->
@@ -109,7 +105,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                             break
                         }
                     }
-                    onComplete(
+                    cont.resume(
                         AlbumDetail(
                             id,
                             albumName,
@@ -125,7 +121,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     )
                 },
                 {
-                    onError(it)
+                    cont.resumeWithException(it)
                 })
         )
     }
