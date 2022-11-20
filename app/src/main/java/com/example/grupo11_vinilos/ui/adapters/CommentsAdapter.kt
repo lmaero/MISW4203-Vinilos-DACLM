@@ -32,14 +32,14 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>
     }
 
     override fun getItemCount(): Int {
-        return comments.size;
+        return comments.size
     }
 
     class CommentsViewHolder(val viewDataBinding: CommentItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
-            companion object {
-                @LayoutRes
-                val LAYOUT = R.layout.comment_item
-            }
+        companion object {
+            @LayoutRes
+            val LAYOUT = R.layout.comment_item
         }
+    }
 }

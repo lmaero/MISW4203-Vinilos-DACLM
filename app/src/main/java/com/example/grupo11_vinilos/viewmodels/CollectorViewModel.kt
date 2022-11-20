@@ -2,6 +2,7 @@ package com.example.grupo11_vinilos.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.example.grupo11_vinilos.database.VinylRoomDatabase
 import com.example.grupo11_vinilos.models.Collector
 import com.example.grupo11_vinilos.repositories.CollectorRepository
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +11,10 @@ import kotlinx.coroutines.withContext
 
 class CollectorViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val collectorsRepository = CollectorRepository(application)
+    private val collectorsRepository = CollectorRepository(
+        application,
+        VinylRoomDatabase.getDatabase(application.applicationContext).collectorsDao()
+    )
 
     private val _collectors = MutableLiveData<List<Collector>>()
 

@@ -20,10 +20,10 @@ class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVi
     var commentsList: MutableList<Comment> = mutableListOf<Comment>()
     var albumDetail: AlbumDetail =
         AlbumDetail(100, "", "", "", "", "", "", tracksList, commentsList, "")
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumDetailViewHolder {
         val withDataBinding: AlbumDetailItemBinding = DataBindingUtil.inflate(
