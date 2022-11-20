@@ -48,12 +48,12 @@ class CollectorFragmentTest {
     @Test
     fun collectorEmailIsDisplayed() {
         navigateToCollectors()
-        onView(allOf(withId(R.id.collectorDetailTelephone), ViewMatchers.isDisplayed()))
+        onView(allOf(withId(R.id.collectorDetailEmail), ViewMatchers.isDisplayed()))
     }
 
     @Test
     fun collectorTelephoneIsDisplayed() {
         navigateToCollectors()
-        onView(allOf(withId(R.id.collectorDetailEmail), ViewMatchers.isDisplayed()))
+        onView(allOf(withId(R.id.collectorDetailTelephone), ViewMatchers.isDisplayed()))
     }
 }

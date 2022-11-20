@@ -1,7 +1,11 @@
 package com.example.grupo11_vinilos.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "albums_detail_table")
 data class AlbumDetail(
-    val albumId: Int,
+    @PrimaryKey val albumId: Int,
     val name: String,
     val cover: String,
     val releaseDate: String,
