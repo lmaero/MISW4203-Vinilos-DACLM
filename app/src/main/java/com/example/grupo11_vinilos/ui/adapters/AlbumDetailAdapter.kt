@@ -12,8 +12,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.AlbumDetailItemBinding
 import com.example.grupo11_vinilos.models.AlbumDetail
-import com.example.grupo11_vinilos.models.Comment
-import com.example.grupo11_vinilos.models.Track
 
 class AlbumDetailAdapter(var albumDetail: AlbumDetail) :
     RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailViewHolder>() {

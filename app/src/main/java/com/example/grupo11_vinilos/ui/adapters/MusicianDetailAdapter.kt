@@ -11,11 +11,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.MusicianDetailItemBinding
-import com.example.grupo11_vinilos.models.Album
 import com.example.grupo11_vinilos.models.MusicianDetail
 
 
-class MusicianDetailAdapter(private var musicianDetail: MusicianDetail) : RecyclerView.Adapter<MusicianDetailAdapter.MusicianDetailViewHolder>() {
+class MusicianDetailAdapter(private var musicianDetail: MusicianDetail) :
+    RecyclerView.Adapter<MusicianDetailAdapter.MusicianDetailViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianDetailViewHolder {
         val withDataBinding: MusicianDetailItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
