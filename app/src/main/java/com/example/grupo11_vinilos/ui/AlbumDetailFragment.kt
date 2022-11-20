@@ -36,17 +36,12 @@ class AlbumDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = AlbumDetailFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        viewModelAdapter = AlbumDetailAdapter()
-        tracksViewModelAdapter = TracksAdapter()
-        commentsViewModelAdapter = CommentsAdapter()
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.albumDetailRv
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = viewModelAdapter
     }
 
     @Deprecated("Deprecated in Java")
@@ -64,9 +59,10 @@ class AlbumDetailFragment : Fragment() {
         )[AlbumDetailViewModel::class.java]
         viewModel.albumDetail.observe(viewLifecycleOwner) {
             it.apply {
-                viewModelAdapter!!.albumDetail = this
+                viewModelAdapter = AlbumDetailAdapter(this)
+                recyclerView.adapter = viewModelAdapter
                 if (this.tracks.size > 0) {
-                    tracksViewModelAdapter!!.tracks = this.tracks
+                    tracksViewModelAdapter = TracksAdapter(this.tracks)
                     binding.tracks.layoutManager = LinearLayoutManager(context)
                     binding.tracks.adapter = tracksViewModelAdapter
                     view?.findViewById<MaterialCardView>(R.id.tracksCardView)?.visibility =
@@ -75,7 +71,7 @@ class AlbumDetailFragment : Fragment() {
                         View.VISIBLE
                 }
                 if (this.comments.size > 0) {
-                    commentsViewModelAdapter!!.comments = this.comments
+                    commentsViewModelAdapter = CommentsAdapter(this.comments)
                     binding.comments.layoutManager = LinearLayoutManager(context)
                     binding.comments.adapter = commentsViewModelAdapter
                     view?.findViewById<MaterialCardView>(R.id.commentsCardView)?.visibility =

@@ -15,15 +15,8 @@ import com.example.grupo11_vinilos.models.AlbumDetail
 import com.example.grupo11_vinilos.models.Comment
 import com.example.grupo11_vinilos.models.Track
 
-class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailViewHolder>() {
-    private var tracksList: MutableList<Track> = mutableListOf()
-    private var commentsList: MutableList<Comment> = mutableListOf()
-    var albumDetail: AlbumDetail =
-        AlbumDetail(100, "", "", "", "", "", "", tracksList, commentsList, "")
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class AlbumDetailAdapter(var albumDetail: AlbumDetail) :
+    RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumDetailViewHolder {
         val withDataBinding: AlbumDetailItemBinding = DataBindingUtil.inflate(

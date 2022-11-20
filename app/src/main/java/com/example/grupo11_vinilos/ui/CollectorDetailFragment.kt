@@ -30,15 +30,12 @@ class CollectorDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = CollectorDetailFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        viewModelAdapter = CollectorDetailAdapter()
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.collectorDetailRv
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = viewModelAdapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -55,7 +52,8 @@ class CollectorDetailFragment : Fragment() {
         )[CollectorDetailViewModel::class.java]
         viewModel.collectorDetail.observe(viewLifecycleOwner) {
             it.apply {
-                viewModelAdapter!!.collectorDetail = this
+                viewModelAdapter = CollectorDetailAdapter(this)
+                recyclerView.adapter = viewModelAdapter
             }
         }
         viewModel.eventNetworkError.observe(

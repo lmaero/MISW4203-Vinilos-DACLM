@@ -9,13 +9,7 @@ import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.CollectorDetailItemBinding
 import com.example.grupo11_vinilos.models.CollectorDetail
 
-class CollectorDetailAdapter :
-    RecyclerView.Adapter<CollectorDetailAdapter.CollectorDetailViewHolder>() {
-    var collectorDetail: CollectorDetail = CollectorDetail(100, "", "", "")
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class CollectorDetailAdapter(private var collectorDetail: CollectorDetail) : RecyclerView.Adapter<CollectorDetailAdapter.CollectorDetailViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorDetailViewHolder {
         val withDataBinding: CollectorDetailItemBinding = DataBindingUtil.inflate(

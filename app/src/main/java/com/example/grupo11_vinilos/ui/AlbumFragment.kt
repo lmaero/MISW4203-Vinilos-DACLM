@@ -40,15 +40,12 @@ class AlbumFragment : Fragment() {
         view.findViewById<Button>(R.id.navButtonCollectors).setOnClickListener {
             findNavController().navigate(R.id.action_albumFragment_to_collectorFragment)
         }
-
-        viewModelAdapter = AlbumsAdapter()
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.albumsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = viewModelAdapter
     }
 
     @Deprecated("Deprecated in Java")
@@ -64,7 +61,8 @@ class AlbumFragment : Fragment() {
         )[AlbumViewModel::class.java]
         viewModel.albums.observe(viewLifecycleOwner) {
             it.apply {
-                viewModelAdapter!!.albums = this
+                viewModelAdapter = AlbumsAdapter(this)
+                recyclerView.adapter = viewModelAdapter
             }
         }
         viewModel.eventNetworkError.observe(

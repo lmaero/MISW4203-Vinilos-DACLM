@@ -11,13 +11,7 @@ import com.example.grupo11_vinilos.databinding.CollectorItemBinding
 import com.example.grupo11_vinilos.models.Collector
 import com.example.grupo11_vinilos.ui.CollectorFragmentDirections
 
-class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>() {
-
-    var collectors: List<Collector> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class CollectorsAdapter(private var collectors: List<Collector>) : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorViewHolder {
         val withDataBinding: CollectorItemBinding = DataBindingUtil.inflate(

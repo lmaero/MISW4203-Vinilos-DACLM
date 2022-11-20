@@ -9,13 +9,7 @@ import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.TrackItemBinding
 import com.example.grupo11_vinilos.models.Track
 
-class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TrackViewHolder>() {
-
-    var tracks: MutableList<Track> = mutableListOf()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class TracksAdapter(private var tracks: MutableList<Track>) : RecyclerView.Adapter<TracksAdapter.TrackViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val withDataBinding: TrackItemBinding = DataBindingUtil.inflate(

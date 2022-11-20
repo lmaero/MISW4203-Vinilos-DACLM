@@ -15,13 +15,7 @@ import com.example.grupo11_vinilos.databinding.MusicianItemBinding
 import com.example.grupo11_vinilos.models.Musician
 import com.example.grupo11_vinilos.ui.MusicianFragmentDirections
 
-class MusiciansAdapter : RecyclerView.Adapter<MusiciansAdapter.MusicianViewHolder>() {
-
-    var musicians: List<Musician> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class MusiciansAdapter(private var musicians: List<Musician>) : RecyclerView.Adapter<MusiciansAdapter.MusicianViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianViewHolder {
         val withDataBinding: MusicianItemBinding = DataBindingUtil.inflate(

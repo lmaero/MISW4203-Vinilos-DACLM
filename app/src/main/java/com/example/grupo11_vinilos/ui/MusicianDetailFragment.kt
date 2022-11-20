@@ -30,15 +30,12 @@ class MusicianDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = MusicianDetailFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        viewModelAdapter = MusicianDetailAdapter()
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.musicianDetailRv
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = viewModelAdapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -55,7 +52,8 @@ class MusicianDetailFragment : Fragment() {
         )[MusicianDetailViewModel::class.java]
         viewModel.musicianDetail.observe(viewLifecycleOwner) {
             it.apply {
-                viewModelAdapter!!.musicianDetail = this
+                viewModelAdapter = MusicianDetailAdapter(this)
+                recyclerView.adapter = viewModelAdapter
             }
         }
         viewModel.eventNetworkError.observe(

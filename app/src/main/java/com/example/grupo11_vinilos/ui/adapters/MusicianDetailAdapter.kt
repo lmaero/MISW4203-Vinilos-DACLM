@@ -15,18 +15,7 @@ import com.example.grupo11_vinilos.models.Album
 import com.example.grupo11_vinilos.models.MusicianDetail
 
 
-class MusicianDetailAdapter :
-    RecyclerView.Adapter<MusicianDetailAdapter.MusicianDetailViewHolder>() {
-    private var albumsList: MutableList<Album> = mutableListOf()
-    var musicianDetail: MusicianDetail =
-        MusicianDetail(100, "", "", "", "", albumsList)
-        set(value) {
-
-            field = value
-            notifyDataSetChanged()
-        }
-
-
+class MusicianDetailAdapter(private var musicianDetail: MusicianDetail) : RecyclerView.Adapter<MusicianDetailAdapter.MusicianDetailViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianDetailViewHolder {
         val withDataBinding: MusicianDetailItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),

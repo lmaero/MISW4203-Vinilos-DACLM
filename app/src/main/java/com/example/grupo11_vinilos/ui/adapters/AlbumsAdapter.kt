@@ -15,13 +15,7 @@ import com.example.grupo11_vinilos.databinding.AlbumItemBinding
 import com.example.grupo11_vinilos.models.Album
 import com.example.grupo11_vinilos.ui.AlbumFragmentDirections
 
-class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
-
-    var albums: List<Album> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class AlbumsAdapter(private var albums: List<Album>) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val withDataBinding: AlbumItemBinding = DataBindingUtil.inflate(

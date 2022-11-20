@@ -40,15 +40,12 @@ class MusicianFragment : Fragment() {
         view.findViewById<Button>(R.id.navButtonCollectors).setOnClickListener {
             findNavController().navigate(R.id.action_musicianFragment_to_collectorFragment)
         }
-
-        viewModelAdapter = MusiciansAdapter()
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.musiciansRv
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = viewModelAdapter
     }
 
     @Deprecated("Deprecated in Java")
@@ -64,7 +61,8 @@ class MusicianFragment : Fragment() {
         )[MusicianViewModel::class.java]
         viewModel.musicians.observe(viewLifecycleOwner) {
             it.apply {
-                viewModelAdapter!!.musicians = this
+                viewModelAdapter = MusiciansAdapter(this)
+                recyclerView.adapter = viewModelAdapter
             }
         }
         viewModel.eventNetworkError.observe(
