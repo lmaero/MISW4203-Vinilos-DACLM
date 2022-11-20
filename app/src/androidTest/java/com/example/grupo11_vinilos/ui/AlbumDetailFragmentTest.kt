@@ -24,14 +24,19 @@ import org.junit.runner.RunWith
 class AlbumDetailFragmentTest {
     @Rule
     @JvmField
-    var activityRule = ActivityScenarioRule<MainActivity>(
+    var activityRule = ActivityScenarioRule(
         MainActivity::class.java
     )
 
     @Test
     fun album_detail_fragment_is_displayed() {
         Thread.sleep(2000)
-        onView(withId(R.id.albumsRv)).perform(RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(0, click()))
+        onView(withId(R.id.albumsRv)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
+                0,
+                click()
+            )
+        )
         Thread.sleep(2000)
         onView(withId(R.id.albumDetailCover)).check(matches(isDisplayed()))
         onView(withId(R.id.albumDetailName)).check(matches(isDisplayed()))
@@ -45,7 +50,12 @@ class AlbumDetailFragmentTest {
     @Test
     fun album_detail_fragment_track_list_is_displayed() {
         Thread.sleep(2000)
-        onView(withId(R.id.albumsRv)).perform(RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(0, click()))
+        onView(withId(R.id.albumsRv)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
+                0,
+                click()
+            )
+        )
         Thread.sleep(2000)
         onView(withId(R.id.tracksTitleCardView)).check(matches(isDisplayed()))
         onView(withId(R.id.tracksCardView)).check(matches(isDisplayed()))
@@ -55,9 +65,14 @@ class AlbumDetailFragmentTest {
     @Test
     fun album_detail_fragment_comment_list_is_displayed() {
         Thread.sleep(2000)
-        onView(withId(R.id.albumsRv)).perform(RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(0, click()))
+        onView(withId(R.id.albumsRv)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
+                0,
+                click()
+            )
+        )
         Thread.sleep(2000)
-        ScreenUtils.swiper(775, 100, 100);
+        ScreenUtils.swiper(775, 100, 100)
         Thread.sleep(2000)
         onView(withId(R.id.commentsTitleCardView)).check(matches(isDisplayed()))
         onView(withId(R.id.commentsCardView)).check(matches(isDisplayed()))
@@ -67,7 +82,12 @@ class AlbumDetailFragmentTest {
     @Test
     fun album_detail_fragment_track_list_is_not_displayed() {
         Thread.sleep(2000)
-        onView(withId(R.id.albumsRv)).perform(RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(1, click()))
+        onView(withId(R.id.albumsRv)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
+                1,
+                click()
+            )
+        )
         Thread.sleep(2000)
         onView(withId(R.id.tracksTitleCardView)).check(matches(not(isDisplayed())))
         onView(withId(R.id.tracksCardView)).check(matches(not(isDisplayed())))
@@ -77,7 +97,12 @@ class AlbumDetailFragmentTest {
     @Test
     fun album_detail_fragment_comment_list_is_not_displayed() {
         Thread.sleep(2000)
-        onView(withId(R.id.albumsRv)).perform(RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(1, click()))
+        onView(withId(R.id.albumsRv)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
+                1,
+                click()
+            )
+        )
         Thread.sleep(2000)
         onView(withId(R.id.commentsTitleCardView)).check(matches(not(isDisplayed())))
         onView(withId(R.id.commentsCardView)).check(matches(not(isDisplayed())))

@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.CollectorDetailFragmentBinding
-import com.example.grupo11_vinilos.models.CollectorDetail
 import com.example.grupo11_vinilos.ui.adapters.CollectorDetailAdapter
 import com.example.grupo11_vinilos.viewmodels.CollectorDetailViewModel
 
@@ -30,7 +28,7 @@ class CollectorDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = CollectorDetailFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = CollectorDetailAdapter()
@@ -54,17 +52,17 @@ class CollectorDetailFragment : Fragment() {
         viewModel = ViewModelProvider(
             this,
             CollectorDetailViewModel.Factory(activity.application, args.collectorId)
-        ).get(CollectorDetailViewModel::class.java)
-        viewModel.collectorDetail.observe(viewLifecycleOwner, Observer<CollectorDetail> {
+        )[CollectorDetailViewModel::class.java]
+        viewModel.collectorDetail.observe(viewLifecycleOwner) {
             it.apply {
                 viewModelAdapter!!.collectorDetail = this
             }
-        })
+        }
         viewModel.eventNetworkError.observe(
-            viewLifecycleOwner,
-            Observer<Boolean> { isNetworkError ->
-                if (isNetworkError) onNetworkError()
-            })
+            viewLifecycleOwner
+        ) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
     }
 
     override fun onDestroyView() {

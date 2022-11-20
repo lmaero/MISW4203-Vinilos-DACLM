@@ -11,7 +11,7 @@ import com.example.grupo11_vinilos.models.Comment
 
 class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>() {
 
-    var comments: MutableList<Comment> = mutableListOf<Comment>()
+    var comments: MutableList<Comment> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()

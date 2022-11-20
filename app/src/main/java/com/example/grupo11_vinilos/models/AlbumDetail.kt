@@ -12,7 +12,7 @@ data class AlbumDetail(
     val description: String,
     val genre: String,
     val recordLabel: String,
-    var tracks: MutableList<Track> = mutableListOf<Track>(),
-    var comments: MutableList<Comment> = mutableListOf<Comment>(),
+    var tracks: MutableList<Track> = mutableListOf(),
+    var comments: MutableList<Comment> = mutableListOf(),
     var performers: String
 )

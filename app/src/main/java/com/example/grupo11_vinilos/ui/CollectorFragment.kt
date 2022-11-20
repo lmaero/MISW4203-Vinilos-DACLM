@@ -61,7 +61,7 @@ class CollectorFragment : Fragment() {
         viewModel = ViewModelProvider(
             this,
             CollectorViewModel.Factory(activity.application)
-        ).get(CollectorViewModel::class.java)
+        )[CollectorViewModel::class.java]
         viewModel.collectors.observe(viewLifecycleOwner) {
             it.apply {
                 viewModelAdapter!!.collectors = this

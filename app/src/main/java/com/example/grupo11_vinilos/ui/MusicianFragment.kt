@@ -61,7 +61,7 @@ class MusicianFragment : Fragment() {
         viewModel = ViewModelProvider(
             this,
             MusicianViewModel.Factory(activity.application)
-        ).get(MusicianViewModel::class.java)
+        )[MusicianViewModel::class.java]
         viewModel.musicians.observe(viewLifecycleOwner) {
             it.apply {
                 viewModelAdapter!!.musicians = this

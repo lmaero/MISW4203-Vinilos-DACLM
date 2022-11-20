@@ -17,7 +17,7 @@ import kotlin.coroutines.suspendCoroutine
 class NetworkServiceAdapter constructor(context: Context) {
     companion object {
         const val BASE_URL = "https://grupo11-vynils-back.herokuapp.com/"
-        var instance: NetworkServiceAdapter? = null
+        private var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
                 instance ?: NetworkServiceAdapter(context).also {
@@ -64,9 +64,10 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
-    suspend fun getAlbumDetail(albumId: Int) = suspendCoroutine<AlbumDetail> { cont ->
+    suspend fun getAlbumDetail(albumId: Int) = suspendCoroutine { cont ->
         requestQueue.add(
-            getRequest("albums/$albumId",
+            getRequest(
+                "albums/$albumId",
                 { response ->
                     val resp = JSONObject(response)
                     val id = resp.getInt("id")
