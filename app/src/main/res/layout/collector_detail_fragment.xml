@@ -12,7 +12,7 @@
         android:id="@+id/txt_no_collectors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="no collector"
+        android:text="@string/no_collector"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView

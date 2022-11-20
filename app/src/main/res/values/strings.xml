@@ -16,4 +16,7 @@
     <string name="tracks_title_card_view">Lista de canciones</string>
     <string name="comments_title_card_view">Comentarios</string>
     <string name="no_album">No album</string>
+    <string name="dash">-</string>
+    <string name="no_collector">No collector</string>
+    <string name="no_musician">No musician</string>
 </resources>
