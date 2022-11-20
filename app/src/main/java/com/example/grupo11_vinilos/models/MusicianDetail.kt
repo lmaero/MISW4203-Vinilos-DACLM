@@ -1,7 +1,11 @@
 package com.example.grupo11_vinilos.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "musicians_detail_table")
 data class MusicianDetail(
-    val musicianId: Int,
+    @PrimaryKey val musicianId: Int,
     val name: String,
     val image: String,
     val description: String,

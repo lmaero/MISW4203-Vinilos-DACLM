@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:overScrollMode="never">
-    <LinearLayout android:layout_width="match_parent"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -17,28 +18,27 @@
             android:id="@+id/txt_no_albums"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="no album"
+            android:text="@string/no_album"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/albumDetailRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/album_detail_item">
-        </androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/album_detail_item" />
 
         <TextView
             android:id="@+id/tracksTitleCardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             android:text="@string/tracks_title_card_view"
-            android:visibility="gone"/>
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/tracksCardView"
@@ -51,8 +51,7 @@
                 android:id="@+id/tracks"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/track_item">
-            </androidx.recyclerview.widget.RecyclerView>
+                tools:listitem="@layout/track_item" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -60,14 +59,14 @@
             android:id="@+id/commentsTitleCardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="sans-serif"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             android:text="@string/comments_title_card_view"
-            android:visibility="gone"/>
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/commentsCardView"

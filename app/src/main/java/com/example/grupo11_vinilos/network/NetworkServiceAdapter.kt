@@ -30,9 +30,10 @@ class NetworkServiceAdapter constructor(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
-    fun getAlbums(onComplete: (resp: List<Album>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    suspend fun getAlbums() = suspendCoroutine<List<Album>> { cont ->
         requestQueue.add(
-            getRequest("albums",
+            getRequest(
+                "albums",
                 { response ->
                     val resp = JSONArray(response)
                     val list = mutableListOf<Album>()
@@ -55,10 +56,10 @@ class NetworkServiceAdapter constructor(context: Context) {
                             )
                         )
                     }
-                    onComplete(list)
+                    cont.resume(list)
                 },
                 {
-                    onError(it)
+                    cont.resumeWithException(it)
                 })
         )
     }
@@ -129,10 +130,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
-    fun getMusicians(
-        onComplete: (resp: List<Musician>) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
+    suspend fun getMusicians() = suspendCoroutine<List<Musician>> { cont ->
         requestQueue.add(
             getRequest(
                 "musicians",
@@ -152,10 +150,10 @@ class NetworkServiceAdapter constructor(context: Context) {
                             )
                         )
                     }
-                    onComplete(list)
+                    cont.resume(list)
                 },
                 {
-                    onError(it)
+                    cont.resumeWithException(it)
                 })
         )
     }
