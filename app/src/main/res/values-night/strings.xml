@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rating_comment_title">"Rating: "</string>
+    <string name="tracks_title_card_view">Lista de canciones</string>
+    <string name="comments_title_card_view">Comentarios</string>
+</resources>

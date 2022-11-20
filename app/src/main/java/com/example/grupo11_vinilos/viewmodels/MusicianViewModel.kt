@@ -2,24 +2,31 @@ package com.example.grupo11_vinilos.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.example.grupo11_vinilos.database.VinylRoomDatabase
 import com.example.grupo11_vinilos.models.Musician
 import com.example.grupo11_vinilos.repositories.MusicianRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MusicianViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val musiciansRepository = MusicianRepository(application)
+    private val musiciansRepository = MusicianRepository(
+        application,
+        VinylRoomDatabase.getDatabase(application.applicationContext).musiciansDao()
+    )
 
     private val _musicians = MutableLiveData<List<Musician>>()
 
     val musicians: LiveData<List<Musician>>
         get() = _musicians
 
-    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+    private var _eventNetworkError = MutableLiveData(false)
 
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    private var _isNetworkErrorShown = MutableLiveData(false)
 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
@@ -29,13 +36,18 @@ class MusicianViewModel(application: Application) : AndroidViewModel(application
     }
 
     private fun refreshDataFromNetwork() {
-        musiciansRepository.refreshData({
-            _musicians.postValue(it)
+        try {
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    val data = musiciansRepository.refreshData()
+                    _musicians.postValue(data)
+                }
+            }
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
-        }, {
+        } catch (e: Exception) {
             _eventNetworkError.value = true
-        })
+        }
     }
 
     fun onNetworkErrorShown() {

@@ -15,8 +15,9 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,12 +30,12 @@
                 android:padding="20dp">
 
                 <ImageView
+                    android:id="@+id/albumDetailCover"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="10dp"
-                    android:contentDescription="@{albumDetail.name}"
-                    app:imageUrl="@{albumDetail.cover}" />
+                    android:contentDescription="@{albumDetail.name}" />
 
                 <TextView
                     android:id="@+id/albumDetailName"
@@ -70,7 +71,7 @@
                         android:id="@+id/albumDetailConcat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" - " />
+                        android:text="@string/dash" />
 
                     <TextView
                         android:id="@+id/albumDetailReleaseDate"
@@ -79,7 +80,6 @@
                         android:text="@{albumDetail.releaseDate}" />
 
                 </LinearLayout>
-
 
                 <TextView
                     android:id="@+id/albumDetailDescription"

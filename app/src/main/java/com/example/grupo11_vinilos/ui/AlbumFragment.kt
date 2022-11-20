@@ -33,22 +33,19 @@ class AlbumFragment : Fragment() {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        view.findViewById<Button>(R.id.navButtonAlbums).setOnClickListener {
-            findNavController().navigate(R.id.action_albumFragment_to_albumFragment)
-        }
-
         view.findViewById<Button>(R.id.navButtonMusicians).setOnClickListener {
-            findNavController().navigate(R.id.action_albumFragment_to_musiciansFragment)
+            findNavController().navigate(R.id.action_albumFragment_to_musicianFragment)
         }
 
-        viewModelAdapter = AlbumsAdapter()
+        view.findViewById<Button>(R.id.navButtonCollectors).setOnClickListener {
+            findNavController().navigate(R.id.action_albumFragment_to_collectorFragment)
+        }
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.albumsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = viewModelAdapter
     }
 
     @Deprecated("Deprecated in Java")
@@ -61,10 +58,11 @@ class AlbumFragment : Fragment() {
         viewModel = ViewModelProvider(
             this,
             AlbumViewModel.Factory(activity.application)
-        ).get(AlbumViewModel::class.java)
+        )[AlbumViewModel::class.java]
         viewModel.albums.observe(viewLifecycleOwner) {
             it.apply {
-                viewModelAdapter!!.albums = this
+                viewModelAdapter = AlbumsAdapter(this)
+                recyclerView.adapter = viewModelAdapter
             }
         }
         viewModel.eventNetworkError.observe(

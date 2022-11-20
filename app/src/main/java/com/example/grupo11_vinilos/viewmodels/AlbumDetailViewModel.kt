@@ -4,6 +4,9 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.grupo11_vinilos.models.AlbumDetail
 import com.example.grupo11_vinilos.repositories.AlbumDetailRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AlbumDetailViewModel(application: Application, albumId: Int) : AndroidViewModel(application) {
 
@@ -14,12 +17,12 @@ class AlbumDetailViewModel(application: Application, albumId: Int) : AndroidView
     val albumDetail: LiveData<AlbumDetail>
         get() = _albumDetail
 
-    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+    private var _eventNetworkError = MutableLiveData(false)
 
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    private var _isNetworkErrorShown = MutableLiveData(false)
 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
@@ -31,13 +34,17 @@ class AlbumDetailViewModel(application: Application, albumId: Int) : AndroidView
     }
 
     private fun refreshDataFromNetwork() {
-        albumDetailRepository.refreshData(id, {
-            _albumDetail.postValue(it)
+        try {
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.Main) {
+                    _albumDetail.value = albumDetailRepository.refreshData(id)
+                }
+            }
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
-        }, {
+        } catch (e: Exception) {
             _eventNetworkError.value = true
-        })
+        }
     }
 
     fun onNetworkErrorShown() {

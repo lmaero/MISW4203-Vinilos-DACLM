@@ -34,21 +34,18 @@ class MusicianFragment : Fragment() {
         val view = binding.root
 
         view.findViewById<Button>(R.id.navButtonAlbums).setOnClickListener {
-            findNavController().navigate(R.id.action_albumFragment_to_albumFragment)
+            findNavController().navigate(R.id.action_musicianFragment_to_albumFragment)
         }
 
-        view.findViewById<Button>(R.id.navButtonMusicians).setOnClickListener {
-            findNavController().navigate(R.id.action_albumFragment_to_musiciansFragment)
+        view.findViewById<Button>(R.id.navButtonCollectors).setOnClickListener {
+            findNavController().navigate(R.id.action_musicianFragment_to_collectorFragment)
         }
-
-        viewModelAdapter = MusiciansAdapter()
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.musiciansRv
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = viewModelAdapter
     }
 
     @Deprecated("Deprecated in Java")
@@ -61,10 +58,11 @@ class MusicianFragment : Fragment() {
         viewModel = ViewModelProvider(
             this,
             MusicianViewModel.Factory(activity.application)
-        ).get(MusicianViewModel::class.java)
+        )[MusicianViewModel::class.java]
         viewModel.musicians.observe(viewLifecycleOwner) {
             it.apply {
-                viewModelAdapter!!.musicians = this
+                viewModelAdapter = MusiciansAdapter(this)
+                recyclerView.adapter = viewModelAdapter
             }
         }
         viewModel.eventNetworkError.observe(

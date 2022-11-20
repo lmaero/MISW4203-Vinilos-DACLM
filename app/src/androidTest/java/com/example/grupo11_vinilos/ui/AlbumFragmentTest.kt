@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 class AlbumFragmentTest {
     @Rule
     @JvmField
-    var activityRule = ActivityScenarioRule<MainActivity>(
+    var activityRule = ActivityScenarioRule(
         MainActivity::class.java
     )
 
@@ -48,17 +48,12 @@ class AlbumFragmentTest {
     }
 
     @Test
-    fun button_albums_is_enabled() {
-        onView(withId(R.id.navButtonAlbums)).check(ViewAssertions.matches(isEnabled()))
-    }
-
-    @Test
     fun button_musicians_is_displayed() {
         onView(withId(R.id.navButtonMusicians)).check(ViewAssertions.matches(isDisplayed()))
     }
 
     @Test
-    fun button_albums_is_displayed() {
-        onView(withId(R.id.navButtonAlbums)).check(ViewAssertions.matches(isDisplayed()))
+    fun button_albums_is_not_displayed() {
+        onView(withId(R.id.navButtonAlbums)).check(ViewAssertions.doesNotExist())
     }
 }
