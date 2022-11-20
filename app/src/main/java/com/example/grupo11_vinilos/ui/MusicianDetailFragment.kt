@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.MusicianDetailFragmentBinding
-import com.example.grupo11_vinilos.models.MusicianDetail
 import com.example.grupo11_vinilos.ui.adapters.MusicianDetailAdapter
 import com.example.grupo11_vinilos.viewmodels.MusicianDetailViewModel
 
@@ -30,7 +28,7 @@ class MusicianDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = MusicianDetailFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = MusicianDetailAdapter()
@@ -54,17 +52,17 @@ class MusicianDetailFragment : Fragment() {
         viewModel = ViewModelProvider(
             this,
             MusicianDetailViewModel.Factory(activity.application, args.musicianId)
-        ).get(MusicianDetailViewModel::class.java)
-        viewModel.musicianDetail.observe(viewLifecycleOwner, Observer<MusicianDetail> {
+        )[MusicianDetailViewModel::class.java]
+        viewModel.musicianDetail.observe(viewLifecycleOwner) {
             it.apply {
                 viewModelAdapter!!.musicianDetail = this
             }
-        })
+        }
         viewModel.eventNetworkError.observe(
-            viewLifecycleOwner,
-            Observer<Boolean> { isNetworkError ->
-                if (isNetworkError) onNetworkError()
-            })
+            viewLifecycleOwner
+        ) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
     }
 
     override fun onDestroyView() {

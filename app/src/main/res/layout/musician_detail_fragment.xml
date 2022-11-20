@@ -12,7 +12,7 @@
         android:id="@+id/txt_no_musicians"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="no musician"
+        android:text="@string/no_musician"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView

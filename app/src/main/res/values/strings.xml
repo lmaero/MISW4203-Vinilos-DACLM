@@ -1,6 +1,5 @@
 <resources>
     <string name="appName">Vinilos App</string>
-    <string name="actionSettings">Settings</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="navButtonAlbums">Álbumes</string>
@@ -11,9 +10,11 @@
     <string name="titleMusicians">Artistas</string>
     <string name="titleCollectors">Coleccionistas</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="rating_comment_title">"Rating: "</string>
     <string name="tracks_title_card_view">Lista de canciones</string>
     <string name="comments_title_card_view">Comentarios</string>
     <string name="no_album">No album</string>
+    <string name="dash">-</string>
+    <string name="no_collector">No collector</string>
+    <string name="no_musician">No musician</string>
 </resources>

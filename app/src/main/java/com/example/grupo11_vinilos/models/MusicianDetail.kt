@@ -10,7 +10,7 @@ data class MusicianDetail(
     val image: String,
     val description: String,
     val birthDate: String,
-    val albums: MutableList<Album> = mutableListOf<Album>()
+    val albums: MutableList<Album> = mutableListOf()
 )
 
 

@@ -11,7 +11,7 @@ import com.example.grupo11_vinilos.models.Track
 
 class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TrackViewHolder>() {
 
-    var tracks: MutableList<Track> = mutableListOf<Track>()
+    var tracks: MutableList<Track> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -28,11 +28,11 @@ class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TrackViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
-        holder.viewDataBinging.track = tracks[position];
+        holder.viewDataBinging.track = tracks[position]
     }
 
     override fun getItemCount(): Int {
-        return tracks.size;
+        return tracks.size
     }
 
     class TrackViewHolder(val viewDataBinging: TrackItemBinding) :

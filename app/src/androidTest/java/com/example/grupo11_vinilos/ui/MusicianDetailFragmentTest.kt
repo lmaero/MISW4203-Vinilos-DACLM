@@ -19,7 +19,7 @@ import org.junit.runner.RunWith
 class MusicianDetailFragmentTest {
     @Rule
     @JvmField
-    var activityRule = ActivityScenarioRule<MainActivity>(
+    var activityRule = ActivityScenarioRule(
         MainActivity::class.java
     )
 
