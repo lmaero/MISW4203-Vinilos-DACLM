@@ -1,6 +1,7 @@
 package com.example.grupo11_vinilos.network
 
 import android.content.Context
+import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -41,9 +42,11 @@ class NetworkServiceAdapter constructor(context: Context) {
 
                     for (i in 0 until resp.length()) {
                         item = resp.getJSONObject(i)
-                        val performer =
-                            item.getString("performers").substring(19, 100).substringBefore(",")
-                                .substringBefore("\"")
+
+                        var performer = ""
+                        if (!(item.getJSONArray("performers").length() == 0)){
+                            performer = item.getString("performers").substring(19, 100).substringBefore(",").substringBefore("\"")
+                        }
                         val album = Album(
                             albumId = item.getInt("id"),
                             name = item.getString("name"),
