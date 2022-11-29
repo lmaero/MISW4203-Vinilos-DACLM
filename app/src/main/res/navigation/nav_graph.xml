@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_albumFragment_to_collectorFragment"
             app:destination="@id/collectorFragment" />
+        <action
+            android:id="@+id/action_albumFragment_to_createAlbumFragment"
+            app:destination="@id/createAlbumFragment" />
     </fragment>
 
     <fragment
@@ -80,6 +83,16 @@
         tools:layout="@layout/collector_detail_fragment">
         <argument
             android:name="collectorId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createAlbumFragment"
+        android:name="com.example.grupo11_vinilos.ui.CreateAlbumFragment"
+        android:label="Create Album"
+        tools:layout="@layout/create_album_fragment">
+        <argument
+            android:name="createAlbumId"
             app:argType="integer" />
     </fragment>
 </navigation>
