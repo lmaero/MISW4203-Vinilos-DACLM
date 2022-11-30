@@ -276,6 +276,19 @@ class NetworkServiceAdapter constructor(context: Context) {
                 Log.d("New Comment", it.toString())
             }))
     }
+    
+    suspend fun postAlbum(body: JSONObject){
+        requestQueue.add(postRequest("albums/",
+            body,
+            Response.Listener<JSONObject> { response ->
+                //onComplete(response)
+                println(response)
+            },
+            Response.ErrorListener {
+                //onError(it)
+                println(it)
+            }))
+    }
 
 
     private fun getRequest(
