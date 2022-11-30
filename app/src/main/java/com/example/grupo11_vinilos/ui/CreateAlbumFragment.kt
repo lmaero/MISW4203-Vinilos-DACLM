@@ -9,43 +9,87 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.navigation.fragment.navArgs
+import com.android.volley.Response
 import com.example.grupo11_vinilos.R
-import com.example.grupo11_vinilos.viewmodels.CreateAlbumViewModel
+import com.example.grupo11_vinilos.databinding.CreateAlbumFragmentBinding
+import com.example.grupo11_vinilos.models.NewAlbum
+import org.json.JSONObject
 
 class CreateAlbumFragment : Fragment() {
+
+    private lateinit var name: String
+    private lateinit var cover: String
+    private lateinit var releaseDate: String
+    private lateinit var genre: String
+    private lateinit var recordLabel: String
+    private lateinit var description: String
+    private lateinit var newAlbum: NewAlbum
+    private lateinit var jsonObject: JSONObject
+    private lateinit var volleyBroker: VolleyBroker
+
 
     companion object {
         fun newInstance() = CreateAlbumFragment()
     }
 
-    private lateinit var viewModel: CreateAlbumViewModel
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.create_album_fragment, container, false)
 
-        val name = view.findViewById<EditText>(R.id.createAlbumName)
-        val cover = view.findViewById<EditText>(R.id.createAlbumCover)
-        val releaseDate = view.findViewById<EditText>(R.id.createAlbumReleaseDate)
-        val genre = view.findViewById<EditText>(R.id.createAlbumGenre)
-        val recordLabel = view.findViewById<EditText>(R.id.createAlbumRecordLabel)
-        val description = view.findViewById<EditText>(R.id.createAlbumDescription)
+        volleyBroker = VolleyBroker(this.requireContext())
+
+
         val saveButton = view.findViewById<Button>(R.id.buttonSaveAlbumInformation)
 
-        saveButton.setOnClickListener{
-            Log.d("name", name.text.toString())
-            Log.d("cover", cover.text.toString())
-            Log.d("releaseDate", releaseDate.text.toString())
-            Log.d("genre", genre.text.toString())
-            Log.d("recordLabel", recordLabel.text.toString())
-            Log.d("description", description.text.toString())
+        saveButton.setOnClickListener {
+
+            name = view.findViewById<EditText>(R.id.createAlbumName).text.toString()
+            cover = view.findViewById<EditText>(R.id.createAlbumCover).text.toString()
+            releaseDate = view.findViewById<EditText>(R.id.createAlbumReleaseDate).text.toString()
+            genre = view.findViewById<EditText>(R.id.createAlbumGenre).text.toString()
+            recordLabel = view.findViewById<EditText>(R.id.createAlbumRecordLabel).text.toString()
+            description = view.findViewById<EditText>(R.id.createAlbumDescription).text.toString()
+
+            Log.d("name", name)
+            Log.d("cover", cover)
+            Log.d("releaseDate", releaseDate)
+            Log.d("genre", genre)
+            Log.d("recordLabel", recordLabel)
+            Log.d("description", description)
+
+            val postParams = mapOf<String, Any>(
+                "name" to name,
+                "cover" to cover,
+                "releaseDate" to releaseDate,
+                "genre" to genre,
+                "recordLabel" to recordLabel,
+                "description" to description,
+            )
+            volleyBroker.instance.add(VolleyBroker.postRequest("albums", JSONObject(postParams),
+                Response.Listener<JSONObject> { response ->
+                    // Display the first 500 characters of the response string.
+                    Log.d("Album", "posted")
+                },
+                Response.ErrorListener {
+                    Log.d("Album", "No posted")
+                }
+            ))
+
         }
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreateAlbumViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
+        // TODO: Pasar la informacion al ViewModel
+        // TODO: Crear el JSON con la informacion ingresada del album
+        // TODO: Mandar el JSON al Repository para hacer el POST
+
+
+
+
+
+
+
 
 }
