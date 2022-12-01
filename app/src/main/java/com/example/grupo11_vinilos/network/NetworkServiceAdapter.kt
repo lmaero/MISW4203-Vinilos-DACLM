@@ -263,6 +263,17 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
+    fun postAlbum(body: JSONObject){
+        requestQueue.add(postRequest("albums/",
+            body,
+            Response.Listener<JSONObject> { response ->
+                Log.d("Album", "posted")
+            },
+            Response.ErrorListener {
+                Log.d("Album", "No posted")
+            }))
+    }
+    
     fun postComment(body: JSONObject, albumId: Int){
         Log.d("New Comment Body", body.toString())
         requestQueue.add(postRequest("albums/$albumId/comments",

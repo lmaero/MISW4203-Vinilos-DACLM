@@ -18,7 +18,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.grupo11_vinilos.R
-import com.example.grupo11_vinilos.databinding.CreateAlbumFragmentBinding
+import com.example.grupo11_vinilos.databinding.NewAlbumFragmentBinding
 import com.example.grupo11_vinilos.models.NewAlbum
 import org.json.JSONObject
 
