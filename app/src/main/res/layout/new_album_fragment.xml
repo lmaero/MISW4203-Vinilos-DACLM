@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.CreateAlbumFragment">
+    tools:context=".ui.NewAlbumFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -16,7 +16,7 @@
         android:text="Album Information" />
 
     <EditText
-        android:id="@+id/createAlbumName"
+        android:id="@+id/newAlbumName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="20"
@@ -25,7 +25,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/createAlbumCover"
+        android:id="@+id/newAlbumCover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="20"
@@ -34,7 +34,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/createAlbumReleaseDate"
+        android:id="@+id/newAlbumReleaseDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="20"
@@ -43,7 +43,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/createAlbumGenre"
+        android:id="@+id/newAlbumGenre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="20"
@@ -52,7 +52,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/createAlbumRecordLabel"
+        android:id="@+id/newAlbumRecordLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="30"
@@ -61,7 +61,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/createAlbumDescription"
+        android:id="@+id/newAlbumDescription"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:ems="30"

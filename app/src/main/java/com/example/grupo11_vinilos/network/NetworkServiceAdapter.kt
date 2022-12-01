@@ -263,16 +263,14 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
-    suspend fun postAlbum(body: JSONObject){
+    fun postAlbum(body: JSONObject){
         requestQueue.add(postRequest("albums/",
             body,
             Response.Listener<JSONObject> { response ->
-                //onComplete(response)
-                println(response)
+                Log.d("Album", "posted")
             },
             Response.ErrorListener {
-                //onError(it)
-                println(it)
+                Log.d("Album", "No posted")
             }))
     }
 
