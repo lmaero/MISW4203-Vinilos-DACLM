@@ -30,7 +30,6 @@ class NewAlbumFragment : Fragment() {
     private lateinit var genre: String
     private lateinit var recordLabel: String
     private lateinit var description: String
-    private lateinit var volleyBroker: VolleyBroker
 
     private lateinit var viewModel: NewAlbumViewModel
     private lateinit var binding: NewAlbumFragmentBinding
@@ -42,7 +41,7 @@ class NewAlbumFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = NewAlbumFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
-        //val view = inflater.inflate(R.layout.new_album_fragment, container, false)
+
         val saveButton = view.findViewById<Button>(R.id.buttonSaveAlbumInformation)
         saveButton.setOnClickListener{
             name = view.findViewById<EditText>(R.id.newAlbumName).text.toString()
@@ -122,43 +121,4 @@ class NewAlbumFragment : Fragment() {
             }
         }
     }
-
-    /*
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.new_album_fragment, container, false)
-
-        volleyBroker = VolleyBroker(this.requireContext())
-
-        val saveButton = view.findViewById<Button>(R.id.buttonSaveAlbumInformation)
-
-        saveButton.setOnClickListener {
-
-            name = view.findViewById<EditText>(R.id.newAlbumName).text.toString()
-            cover = view.findViewById<EditText>(R.id.newAlbumCover).text.toString()
-            releaseDate = view.findViewById<EditText>(R.id.newAlbumReleaseDate).text.toString()
-            genre = view.findViewById<EditText>(R.id.newAlbumGenre).text.toString()
-            recordLabel = view.findViewById<EditText>(R.id.newAlbumRecordLabel).text.toString()
-            description = view.findViewById<EditText>(R.id.newAlbumDescription).text.toString()
-
-            val postParams = mapOf<String, Any>(
-                "name" to name,
-                "cover" to cover,
-                "releaseDate" to releaseDate,
-                "genre" to genre,
-                "recordLabel" to recordLabel,
-                "description" to description,
-            )
-            volleyBroker.instance.add(VolleyBroker.postRequest("albums", JSONObject(postParams),
-                Response.Listener<JSONObject> { response ->
-                    Log.d("Album", "posted")
-                },
-                Response.ErrorListener {
-                    Log.d("Album", "No posted")
-                }
-            ))
-
-        }
-        return view
-    }
-    */
 }
