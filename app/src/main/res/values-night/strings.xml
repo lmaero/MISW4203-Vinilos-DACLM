@@ -3,4 +3,13 @@
     <string name="rating_comment_title">"Rating: "</string>
     <string name="tracks_title_card_view">Lista de canciones</string>
     <string name="comments_title_card_view">Comentarios</string>
+    <string name="rating_value_5">5</string>
+    <string name="rating_value_4">4</string>
+    <string name="rating_value_3">3</string>
+    <string name="rating_value_2">2</string>
+    <string name="rating_value_1">1</string>
+    <string name="rating_title">Rating:</string>
+    <string name="new_comment_title">Comentar</string>
+    <string name="comment_action_button">Comentar</string>
+    <string name="clean_action_button">Limpiar</string>
 </resources>
