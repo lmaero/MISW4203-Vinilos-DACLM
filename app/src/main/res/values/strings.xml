@@ -17,6 +17,8 @@
     <string name="dash">-</string>
     <string name="no_collector">No collector</string>
     <string name="no_musician">No musician</string>
+    <string name="image_complement_album">Portada del álbum</string>
+    <string name="image_complement_artist">Foto de</string>
     <string name="rating_value_5">5</string>
     <string name="rating_value_4">4</string>
     <string name="rating_value_3">3</string>
