@@ -33,7 +33,7 @@
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginVertical="5dp"
-                    android:contentDescription="@{album.name}" />
+                    android:contentDescription="@string/image_complement_album" />
 
                 <LinearLayout
                     android:layout_width="300dp"

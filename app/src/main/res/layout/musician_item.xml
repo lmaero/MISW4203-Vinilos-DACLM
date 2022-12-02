@@ -32,7 +32,7 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginVertical="5dp"
-                    android:contentDescription="@{musician.name}" />
+                    android:contentDescription="@string/image_complement_artist" />
 
                 <LinearLayout
                     android:layout_width="300dp"
