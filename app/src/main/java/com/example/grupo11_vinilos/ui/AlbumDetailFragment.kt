@@ -1,6 +1,5 @@
 package com.example.grupo11_vinilos.ui
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,11 +52,14 @@ class AlbumDetailFragment : Fragment() {
             description = binding.root.findViewById<EditText>(R.id.commentEditText).text.toString()
             newCommentViewModel.setDescription(description)
 
-            val ratingSelectedId = binding.root.findViewById<RadioGroup>(R.id.radioGroup).checkedRadioButtonId
-            rating = binding.root.findViewById<RadioButton>(ratingSelectedId).text.toString().toInt()
+            val ratingSelectedId =
+                binding.root.findViewById<RadioGroup>(R.id.radioGroup).checkedRadioButtonId
+            rating =
+                binding.root.findViewById<RadioButton>(ratingSelectedId).text.toString().toInt()
             newCommentViewModel.setRating(rating)
 
-            val commenterSelected = binding.root.findViewById<Spinner>(R.id.commenterSpinner).selectedItem.toString()
+            val commenterSelected =
+                binding.root.findViewById<Spinner>(R.id.commenterSpinner).selectedItem.toString()
             val commenterSelectedSplited = commenterSelected.split(" - ")
             val commenterId = commenterSelectedSplited[0].toInt()
             val commenterName = commenterSelectedSplited[1]
@@ -73,21 +74,21 @@ class AlbumDetailFragment : Fragment() {
                     newCommentViewModel.getCollector().value!!
                 )
                 // To reload the all fragment
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     parentFragmentManager
                         .beginTransaction()
                         .detach(this)
-                        .commit();
+                        .commit()
                     parentFragmentManager
                         .beginTransaction()
                         .attach(this)
-                        .commit();
+                        .commit()
                 } else {
                     parentFragmentManager
                         .beginTransaction()
                         .detach(this)
                         .attach(this)
-                        .commit();
+                        .commit()
                 }
                 viewModel.recreateData()
                 showToast("Comentario creado exitosamente")
@@ -167,10 +168,14 @@ class AlbumDetailFragment : Fragment() {
 
         collectorsViewModel.collectors.observe(viewLifecycleOwner) { it ->
             it.forEach() {
-               collectorsList.add("${it.collectorId} - ${it.name}")
-           }
-            collectorsArr = collectorsList.toTypedArray();
-            val aa = ArrayAdapter(activity.baseContext, android.R.layout.simple_spinner_item, collectorsArr)
+                collectorsList.add("${it.collectorId} - ${it.name}")
+            }
+            collectorsArr = collectorsList.toTypedArray()
+            val aa = ArrayAdapter(
+                activity.baseContext,
+                android.R.layout.simple_spinner_item,
+                collectorsArr
+            )
             aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             view?.findViewById<Spinner>(R.id.commenterSpinner)?.adapter = aa
         }
