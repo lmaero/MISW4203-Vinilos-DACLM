@@ -4,6 +4,4 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray_bg">#E7E7E7</color>
     <color name="gray_em">#707070</color>
-    <color name="success">#009688</color>
-    <color name="error">#F44336</color>
 </resources>

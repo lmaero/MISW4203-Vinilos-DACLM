@@ -37,6 +37,5 @@
     <string name="rating_title">Rating:</string>
     <string name="new_comment_title">Comentar</string>
     <string name="comment_action_button">Comentar</string>
-    <string name="clean_action_button">Limpiar</string>
     <string name="commenter_title">Usuario:</string>
 </resources>
