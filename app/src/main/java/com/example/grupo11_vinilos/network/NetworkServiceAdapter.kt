@@ -1,6 +1,7 @@
 package com.example.grupo11_vinilos.network
 
 import android.content.Context
+import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -262,14 +263,17 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
-    fun postComment(body: JSONObject, albumId: Int,  onComplete:(resp:JSONObject)->Unit , onError: (error:VolleyError)->Unit){
+    fun postComment(body: JSONObject, albumId: Int){
+        Log.d("New Comment Body", body.toString())
         requestQueue.add(postRequest("albums/$albumId/comments",
             body,
             { response ->
-                onComplete(response)
+                Log.d("New Comment", "posted")
+                Log.d("New Comment", response.toString())
             },
             {
-                onError(it)
+                Log.d("New Comment", "No posted")
+                Log.d("New Comment", it.toString())
             }))
     }
 
