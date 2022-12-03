@@ -47,6 +47,10 @@ class AlbumDetailViewModel(application: Application, albumId: Int) : AndroidView
         }
     }
 
+    fun recreateData() {
+        refreshDataFromNetwork()
+    }
+
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
