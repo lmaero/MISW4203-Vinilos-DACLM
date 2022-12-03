@@ -89,7 +89,7 @@
     <fragment
         android:id="@+id/createAlbumFragment"
         android:name="com.example.grupo11_vinilos.ui.NewAlbumFragment"
-        android:label="Create Album"
+        android:label="@string/create_album"
         tools:layout="@layout/new_album_fragment">
         <argument
             android:name="createAlbumId"
