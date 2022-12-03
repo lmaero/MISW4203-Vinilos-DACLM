@@ -2,25 +2,16 @@ package com.example.grupo11_vinilos.ui
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.android.volley.Response
 import com.example.grupo11_vinilos.R
-import com.example.grupo11_vinilos.databinding.AlbumFragmentBinding
 import com.example.grupo11_vinilos.databinding.NewAlbumFragmentBinding
-import com.example.grupo11_vinilos.repositories.CollectorDetailRepository
-import com.example.grupo11_vinilos.ui.adapters.AlbumsAdapter
-import com.example.grupo11_vinilos.viewmodels.AlbumViewModel
 import com.example.grupo11_vinilos.viewmodels.NewAlbumViewModel
-import org.json.JSONObject
 
 class NewAlbumFragment : Fragment() {
 
@@ -34,16 +25,16 @@ class NewAlbumFragment : Fragment() {
     private lateinit var viewModel: NewAlbumViewModel
     private lateinit var binding: NewAlbumFragmentBinding
 
-
-    companion object {
-        fun newInstance() = NewAlbumFragment()
-    }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = NewAlbumFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
 
         val saveButton = view.findViewById<Button>(R.id.buttonSaveAlbumInformation)
-        saveButton.setOnClickListener{
+        saveButton.setOnClickListener {
             name = view.findViewById<EditText>(R.id.newAlbumName).text.toString()
             viewModel.setNewAlbumName(name)
 
