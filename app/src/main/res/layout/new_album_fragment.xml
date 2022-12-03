@@ -6,78 +6,94 @@
     android:orientation="vertical"
     tools:context=".ui.NewAlbumFragment">
 
-    <TextView
-        android:id="@+id/textView"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:layout_gravity="center_vertical"
-        android:textAppearance="@color/black"
-        android:text="Album Information" />
+        android:layout_marginTop="20dp">
 
-    <EditText
-        android:id="@+id/newAlbumName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="20"
-        android:hint="Name"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-    <EditText
-        android:id="@+id/newAlbumCover"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="20"
-        android:hint="Cover"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+            <EditText
+                android:id="@+id/newAlbumName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:ems="20"
+                android:hint="@string/hint_name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColorHint="@color/gray_em" />
 
-    <EditText
-        android:id="@+id/newAlbumReleaseDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="20"
-        android:hint="Date (YYYY-MM-DD) "
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+            <EditText
+                android:id="@+id/newAlbumCover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="URL"
+                android:ems="20"
+                android:hint="@string/hint_cover"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColorHint="@color/gray_em" />
 
-    <EditText
-        android:id="@+id/newAlbumGenre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="20"
-        android:hint="Genre"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+            <EditText
+                android:id="@+id/newAlbumReleaseDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Date"
+                android:ems="20"
+                android:hint="@string/hint_date"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColorHint="@color/gray_em"
+                tools:ignore="TextFields" />
 
-    <EditText
-        android:id="@+id/newAlbumRecordLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="30"
-        android:hint="Record label"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+            <EditText
+                android:id="@+id/newAlbumGenre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:ems="20"
+                android:hint="@string/hint_genre"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColorHint="@color/gray_em" />
 
-    <EditText
-        android:id="@+id/newAlbumDescription"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:ems="30"
-        android:gravity="top"
-        android:hint="Description"
-        android:inputType="textMultiLine"
-        android:background="@null"/>
+            <EditText
+                android:id="@+id/newAlbumRecordLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:ems="30"
+                android:hint="@string/hint_record_label"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColorHint="@color/gray_em" />
+
+            <EditText
+                android:id="@+id/newAlbumDescription"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:autofillHints="Description"
+                android:background="@null"
+                android:ems="30"
+                android:gravity="top"
+                android:hint="@string/hint_description"
+                android:inputType="textMultiLine"
+                android:textColorHint="@color/gray_em" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <Button
         android:id="@+id/buttonSaveAlbumInformation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
-        android:text="Save" />
-
-
+        android:text="@string/button_save"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 </LinearLayout>

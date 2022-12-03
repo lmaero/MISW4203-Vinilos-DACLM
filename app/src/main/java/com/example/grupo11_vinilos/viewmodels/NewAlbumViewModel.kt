@@ -1,17 +1,11 @@
 package com.example.grupo11_vinilos.viewmodels
 
 import android.app.Application
-import android.widget.EditText
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.example.grupo11_vinilos.repositories.CollectorDetailRepository
+import androidx.lifecycle.*
 import com.example.grupo11_vinilos.repositories.NewAlbumRepository
 import org.json.JSONObject
 
-class NewAlbumViewModel(application: Application): AndroidViewModel(application) {
+class NewAlbumViewModel(application: Application) : AndroidViewModel(application) {
 
     private var _name: MutableLiveData<String> = MutableLiveData<String>("")
     private var _cover: MutableLiveData<String> = MutableLiveData("")
@@ -71,7 +65,14 @@ class NewAlbumViewModel(application: Application): AndroidViewModel(application)
         return _description
     }
 
-    fun setInfo(name: String, cover: String, releaseDate: String, genre: String, recordLabel: String, description: String ){
+    fun setInfo(
+        name: String,
+        cover: String,
+        releaseDate: String,
+        genre: String,
+        recordLabel: String,
+        description: String
+    ) {
         val postParams = mapOf<String, Any>(
             "name" to name,
             "cover" to cover,
@@ -82,7 +83,6 @@ class NewAlbumViewModel(application: Application): AndroidViewModel(application)
         )
         newAlbumRepository.refreshData(JSONObject(postParams))
     }
-
 
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
