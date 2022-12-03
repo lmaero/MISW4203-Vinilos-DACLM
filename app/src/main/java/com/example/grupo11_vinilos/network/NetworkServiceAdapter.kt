@@ -45,8 +45,10 @@ class NetworkServiceAdapter constructor(context: Context) {
                         item = resp.getJSONObject(i)
 
                         var performer = ""
-                        if (!(item.getJSONArray("performers").length() == 0)){
-                            performer = item.getString("performers").substring(19, 100).substringBefore(",").substringBefore("\"")
+                        if (item.getJSONArray("performers").length() != 0) {
+                            performer =
+                                item.getString("performers").substring(19, 100).substringBefore(",")
+                                    .substringBefore("\"")
                         }
                         val album = Album(
                             albumId = item.getInt("id"),
@@ -222,7 +224,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val resp = JSONArray(response)
                     val list = mutableListOf<Collector>()
                     var item: JSONObject?
-                    
+
                     for (i in 0 until resp.length()) {
                         item = resp.getJSONObject(i)
                         val collector = Collector(
@@ -263,6 +265,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
+    
     fun postComment(body: JSONObject, albumId: Int){
         Log.d("New Comment Body", body.toString())
         requestQueue.add(postRequest("albums/$albumId/comments",
@@ -275,6 +278,20 @@ class NetworkServiceAdapter constructor(context: Context) {
                 Log.d("New Comment", "No posted")
                 Log.d("New Comment", it.toString())
             }))
+    }
+    
+
+    fun postAlbum(body: JSONObject) {
+        requestQueue.add(
+            postRequest("albums/",
+                body,
+                {
+                    Log.d("Album", "posted")
+                },
+                {
+                    Log.d("Album", "No posted")
+                })
+        )
     }
 
 
@@ -291,7 +308,13 @@ class NetworkServiceAdapter constructor(context: Context) {
         body: JSONObject,
         responseListener: Response.Listener<JSONObject>,
         errorListener: Response.ErrorListener
-    ): JsonObjectRequest{
-        return  JsonObjectRequest(Request.Method.POST, BASE_URL+path, body, responseListener, errorListener)
+    ): JsonObjectRequest {
+        return JsonObjectRequest(
+            Request.Method.POST,
+            BASE_URL + path,
+            body,
+            responseListener,
+            errorListener
+        )
     }
 }
