@@ -11,6 +11,7 @@
     <string name="titleCollectors">Coleccionistas</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="rating_comment_title">"Rating: "</string>
+    <string name="rating_comment_input">"Deja un comentario: "</string>
     <string name="tracks_title_card_view">Lista de canciones</string>
     <string name="comments_title_card_view">Comentarios</string>
     <string name="no_album">No album</string>
@@ -36,6 +37,5 @@
     <string name="rating_title">Rating:</string>
     <string name="new_comment_title">Comentar</string>
     <string name="comment_action_button">Comentar</string>
-    <string name="clean_action_button">Limpiar</string>
     <string name="commenter_title">Usuario:</string>
 </resources>

@@ -6,7 +6,7 @@ import com.example.grupo11_vinilos.models.Collector
 import com.example.grupo11_vinilos.repositories.NewCommentRepository
 import org.json.JSONObject
 
-class NewCommentViewModel(application: Application, albumId: Int): AndroidViewModel(application) {
+class NewCommentViewModel(application: Application, albumId: Int) : AndroidViewModel(application) {
     private val id: Int = albumId
     private var _description: MutableLiveData<String> = MutableLiveData<String>("")
     private var _rating: MutableLiveData<Int> = MutableLiveData(0)
@@ -45,7 +45,7 @@ class NewCommentViewModel(application: Application, albumId: Int): AndroidViewMo
             "name" to collector.name,
         )
 
-        val postBody = mapOf<String, Any>(
+        val postBody = mapOf(
             "description" to description,
             "rating" to rating,
             "collector" to collectorBody
@@ -54,7 +54,7 @@ class NewCommentViewModel(application: Application, albumId: Int): AndroidViewMo
         _newCommentRepository.refreshData(JSONObject(postBody), id)
     }
 
-    class Factory(val application: Application, val albumId: Int): ViewModelProvider.Factory {
+    class Factory(val application: Application, val albumId: Int) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(NewCommentViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
