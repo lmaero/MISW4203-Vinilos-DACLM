@@ -167,7 +167,7 @@ class AlbumDetailFragment : Fragment() {
         var collectorsArr: Array<String>
 
         collectorsViewModel.collectors.observe(viewLifecycleOwner) { it ->
-            it.forEach() {
+            it.forEach {
                 collectorsList.add("${it.collectorId} - ${it.name}")
             }
             collectorsArr = collectorsList.toTypedArray()
