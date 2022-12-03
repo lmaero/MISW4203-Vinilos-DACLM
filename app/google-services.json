@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "608009556859",
+    "project_id": "misw4204-grupo11",
+    "storage_bucket": "misw4204-grupo11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608009556859:android:209f8e102f28d9f44723de",
+        "android_client_info": {
+          "package_name": "com.example.grupo11_vinilos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608009556859-gbqka14qori16rkrqp65pivhgo4g4hem.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_i1yMRbeKJtdUw6U1CCi5UClJDzGkOeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608009556859-gbqka14qori16rkrqp65pivhgo4g4hem.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
