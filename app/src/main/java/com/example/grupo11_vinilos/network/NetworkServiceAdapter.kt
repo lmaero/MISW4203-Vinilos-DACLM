@@ -265,18 +265,6 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
-    fun postAlbum(body: JSONObject) {
-        requestQueue.add(
-            postRequest("albums/",
-                body,
-                {
-                    Log.d("Album", "posted")
-                },
-                {
-                    Log.d("Album", "No posted")
-                })
-        )
-    }
     
     fun postComment(body: JSONObject, albumId: Int){
         Log.d("New Comment Body", body.toString())
@@ -292,17 +280,18 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
     
-    suspend fun postAlbum(body: JSONObject){
-        requestQueue.add(postRequest("albums/",
-            body,
-            Response.Listener<JSONObject> { response ->
-                //onComplete(response)
-                println(response)
-            },
-            Response.ErrorListener {
-                //onError(it)
-                println(it)
-            }))
+
+    fun postAlbum(body: JSONObject) {
+        requestQueue.add(
+            postRequest("albums/",
+                body,
+                {
+                    Log.d("Album", "posted")
+                },
+                {
+                    Log.d("Album", "No posted")
+                })
+        )
     }
 
 
