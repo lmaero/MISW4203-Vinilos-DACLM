@@ -11,10 +11,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.ui.adapters.AlbumsAdapter
-import com.example.grupo11_vinilos.utils.ScreenUtils
 import io.github.serpro69.kfaker.Faker
-import junit.framework.Assert.assertEquals
 import org.hamcrest.Matchers.*
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -73,11 +72,9 @@ class AlbumDetailFragmentTest {
             )
         )
         Thread.sleep(2000)
-        ScreenUtils.swiper(775, 100, 100)
-        Thread.sleep(2000)
-        onView(withId(R.id.commentsTitleCardView)).check(matches(isDisplayed()))
-        onView(withId(R.id.commentsCardView)).check(matches(isDisplayed()))
+        onView(withId(R.id.commentsCardView)).perform(scrollTo())
         Thread.sleep(500)
+        onView(withId(R.id.comments)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -86,7 +83,7 @@ class AlbumDetailFragmentTest {
         val faker = Faker()
         val newCommentBody = faker.gameOfThrones.quotes()
         // Select a album with few comments
-        val albumToSelect: Int = (2..3).random()
+        val albumToSelect: Int = (0..3).random()
 
         Thread.sleep(2000)
         // Select the album to add a new comment
@@ -138,21 +135,6 @@ class AlbumDetailFragmentTest {
         Thread.sleep(2000)
         onView(withId(R.id.tracksTitleCardView)).check(matches(not(isDisplayed())))
         onView(withId(R.id.tracksCardView)).check(matches(not(isDisplayed())))
-        Thread.sleep(500)
-    }
-
-    @Test
-    fun album_detail_fragment_comment_list_is_not_displayed() {
-        Thread.sleep(2000)
-        onView(withId(R.id.albumsRv)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                1,
-                click()
-            )
-        )
-        Thread.sleep(2000)
-        onView(withId(R.id.commentsTitleCardView)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.commentsCardView)).check(matches(not(isDisplayed())))
         Thread.sleep(500)
     }
 }
