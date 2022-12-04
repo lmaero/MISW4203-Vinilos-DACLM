@@ -193,14 +193,14 @@ class AlbumDetailFragment : Fragment() {
 
     private fun onNetworkError() {
         if (!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
+            showToast("Network Error")
             viewModel.onNetworkErrorShown()
         }
     }
 
     private fun showToast(message: String) {
         Toast.makeText(
-            this.requireActivity().applicationContext,
+            activity,
             message,
             Toast.LENGTH_LONG
         ).show()
