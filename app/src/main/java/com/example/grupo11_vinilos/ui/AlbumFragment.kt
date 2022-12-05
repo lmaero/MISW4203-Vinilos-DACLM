@@ -15,6 +15,7 @@ import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.AlbumFragmentBinding
 import com.example.grupo11_vinilos.ui.adapters.AlbumsAdapter
 import com.example.grupo11_vinilos.viewmodels.AlbumViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -40,6 +41,11 @@ class AlbumFragment : Fragment() {
         view.findViewById<Button>(R.id.navButtonCollectors).setOnClickListener {
             findNavController().navigate(R.id.action_albumFragment_to_collectorFragment)
         }
+
+        view.findViewById<FloatingActionButton>(R.id.addAlbumButton).setOnClickListener {
+            findNavController().navigate(R.id.action_albumFragment_to_createAlbumFragment)
+        }
+
         return view
     }
 

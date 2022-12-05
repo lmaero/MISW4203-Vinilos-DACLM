@@ -1,19 +1,20 @@
 package com.example.grupo11_vinilos.ui
 
-
+import android.util.Log
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.ui.adapters.AlbumsAdapter
-import com.example.grupo11_vinilos.utils.ScreenUtils
-import org.hamcrest.Matchers.not
+import io.github.serpro69.kfaker.Faker
+import org.hamcrest.Matchers.*
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,8 +34,7 @@ class AlbumDetailFragmentTest {
         Thread.sleep(2000)
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                0,
-                click()
+                0, click()
             )
         )
         Thread.sleep(2000)
@@ -45,21 +45,32 @@ class AlbumDetailFragmentTest {
         onView(withId(R.id.albumDetailReleaseDate)).check(matches(isDisplayed()))
         onView(withId(R.id.albumDetailDescription)).check(matches(isDisplayed()))
         Thread.sleep(500)
+
     }
 
     @Test
     fun album_detail_fragment_track_list_is_displayed() {
         Thread.sleep(2000)
+
+// Get te initial number of albums
+        var initAlbumsCount = -1
+        activityRule.scenario.onActivity { activityScenarioRule ->
+            val recyclerView = activityScenarioRule.findViewById<RecyclerView>(R.id.albumsRv)
+            initAlbumsCount = recyclerView.adapter?.itemCount!!
+        }
+
+        // Select a specific album with tracks and comments
+        val albumToSelect: Int = initAlbumsCount - 4
+
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                0,
-                click()
+                albumToSelect, click()
             )
         )
         Thread.sleep(2000)
         onView(withId(R.id.tracksTitleCardView)).check(matches(isDisplayed()))
-        onView(withId(R.id.tracksCardView)).check(matches(isDisplayed()))
         Thread.sleep(500)
+        onView(withId(R.id.tracksCardView)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -67,16 +78,72 @@ class AlbumDetailFragmentTest {
         Thread.sleep(2000)
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                0,
-                click()
+                0, click()
             )
         )
         Thread.sleep(2000)
-        ScreenUtils.swiper(775, 100, 100)
-        Thread.sleep(2000)
-        onView(withId(R.id.commentsTitleCardView)).check(matches(isDisplayed()))
-        onView(withId(R.id.commentsCardView)).check(matches(isDisplayed()))
+        onView(withId(R.id.commentsCardView)).perform(scrollTo())
         Thread.sleep(500)
+        onView(withId(R.id.comments)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun album_detail_fragment_create_new_comment() {
+        // Init faker bank data and select data to add new comment
+        val faker = Faker()
+        val newCommentBody = faker.gameOfThrones.quotes()
+        // Select a album with few comments
+        val albumToSelect = 0
+
+        Thread.sleep(2000)
+        // Select the album to add a new comment
+        onView(withId(R.id.albumsRv)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
+                albumToSelect, click()
+            )
+        )
+
+        Thread.sleep(2000)
+        // Get te initial number of comments
+        var initCommentsCount = -1
+        activityRule.scenario.onActivity { activityScenarioRule ->
+            val recyclerView = activityScenarioRule.findViewById<RecyclerView>(R.id.comments)
+            initCommentsCount = recyclerView.adapter?.itemCount!!
+        }
+        Thread.sleep(2000)
+        // Scroll to the new comment layout
+        onView(withId(R.id.newCommentLayout)).perform(scrollTo())
+        Thread.sleep(2000)
+        // Rating the comment with the maximum value
+        onView(withId(R.id.ratingValue5)).perform(click())
+        Thread.sleep(2000)
+        // Add new comment with the faker data
+        onView(withId(R.id.commentEditText)).perform(typeText(newCommentBody), closeSoftKeyboard())
+        Thread.sleep(2000)
+        // Click on the add comment button
+        onView(withId(R.id.createNewCommentButton)).perform(click())
+        Thread.sleep(2000)
+        // Get the new number of comments
+
+        onView(isRoot()).perform(pressBack())
+        Thread.sleep(2000)
+        onView(withId(R.id.albumsRv)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
+                albumToSelect, click()
+            )
+        )
+        Thread.sleep(2000)
+
+        var finalCommentsCount = -1
+        activityRule.scenario.onActivity { activityScenarioRule ->
+            val recyclerView = activityScenarioRule.findViewById<RecyclerView>(R.id.comments)
+            finalCommentsCount = recyclerView.adapter?.itemCount!!
+        }
+        Thread.sleep(2000)
+
+
+        // Check if the new number of comments is the initial number of comments plus one
+        assertEquals(finalCommentsCount, initCommentsCount + 1)
     }
 
     @Test
@@ -84,8 +151,7 @@ class AlbumDetailFragmentTest {
         Thread.sleep(2000)
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                1,
-                click()
+                1, click()
             )
         )
         Thread.sleep(2000)
@@ -95,17 +161,62 @@ class AlbumDetailFragmentTest {
     }
 
     @Test
-    fun album_detail_fragment_comment_list_is_not_displayed() {
+    fun album_fragment_create_new_album() {
+
+        // Get te initial number of albums
         Thread.sleep(2000)
-        onView(withId(R.id.albumsRv)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                1,
-                click()
-            )
-        )
+        var initAlbumsCount: Int
+        activityRule.scenario.onActivity { activityScenarioRule ->
+            val recyclerView = activityScenarioRule.findViewById<RecyclerView>(R.id.albumsRv)
+            initAlbumsCount = recyclerView.adapter?.itemCount!!
+            Log.d("InitialCount", initAlbumsCount.toString())
+        }
+
         Thread.sleep(2000)
-        onView(withId(R.id.commentsTitleCardView)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.commentsCardView)).check(matches(not(isDisplayed())))
+        // Press the add button album
+        onView(withId(R.id.addAlbumButton)).perform(click())
         Thread.sleep(500)
+
+        // Add album name
+        onView(withId(R.id.newAlbumName)).perform(
+            typeText("Miss Monique"), closeSoftKeyboard()
+        )
+        Thread.sleep(500)
+
+        // Add album cover
+        onView(withId(R.id.newAlbumCover)).perform(
+            typeText("https://media.istockphoto.com/id/1175435360/es/vector/icono-de-nota-musical-ilustraci%C3%B3n-vectorial.jpg?s=1024x1024&w=is&k=20&c=X4o4H-Q8tntcdvKkwnVeB5uho9EJxLHrk4JdXYqJI7E="),
+            closeSoftKeyboard()
+        )
+        Thread.sleep(500)
+
+        // Add album release date
+        onView(withId(R.id.newAlbumReleaseDate)).perform(
+            typeText("2022-12-02"), closeSoftKeyboard()
+        )
+        Thread.sleep(500)
+
+        // Add album genre
+        onView(withId(R.id.newAlbumGenre)).perform(
+            typeText("Salsa"), closeSoftKeyboard()
+        )
+        Thread.sleep(500)
+
+        // Add album record
+        onView(withId(R.id.newAlbumRecordLabel)).perform(
+            typeText("Elektra"), closeSoftKeyboard()
+        )
+        Thread.sleep(500)
+
+        // Add album description
+        onView(withId(R.id.newAlbumDescription)).perform(
+            typeText("Este es un nuevo algun que acaba de ser lanzado"),
+            closeSoftKeyboard()
+        )
+        Thread.sleep(500)
+
+        // Add album description
+        onView(withId(R.id.buttonSaveAlbumInformation)).perform(click())
+        Thread.sleep(2000)
     }
 }

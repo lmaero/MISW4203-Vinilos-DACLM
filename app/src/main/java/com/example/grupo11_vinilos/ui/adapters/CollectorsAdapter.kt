@@ -11,7 +11,8 @@ import com.example.grupo11_vinilos.databinding.CollectorItemBinding
 import com.example.grupo11_vinilos.models.Collector
 import com.example.grupo11_vinilos.ui.CollectorFragmentDirections
 
-class CollectorsAdapter(private var collectors: List<Collector>) : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>() {
+class CollectorsAdapter(private var collectors: List<Collector>) :
+    RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorViewHolder {
         val withDataBinding: CollectorItemBinding = DataBindingUtil.inflate(

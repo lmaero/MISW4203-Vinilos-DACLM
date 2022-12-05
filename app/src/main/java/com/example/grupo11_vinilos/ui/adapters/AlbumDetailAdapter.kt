@@ -13,15 +13,12 @@ import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.AlbumDetailItemBinding
 import com.example.grupo11_vinilos.models.AlbumDetail
 
-class AlbumDetailAdapter(var albumDetail: AlbumDetail) :
+class AlbumDetailAdapter(private var albumDetail: AlbumDetail) :
     RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumDetailViewHolder {
         val withDataBinding: AlbumDetailItemBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            AlbumDetailViewHolder.LAYOUT,
-            parent,
-            false
+            LayoutInflater.from(parent.context), AlbumDetailViewHolder.LAYOUT, parent, false
         )
         return AlbumDetailViewHolder(withDataBinding)
     }
@@ -45,15 +42,11 @@ class AlbumDetailAdapter(var albumDetail: AlbumDetail) :
         }
 
         fun bind(album: AlbumDetail) {
-            Glide.with(itemView)
-                .load(album.cover.toUri().buildUpon().scheme("https").build())
+            Glide.with(itemView).load(album.cover.toUri().buildUpon().scheme("https").build())
                 .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .error(R.drawable.ic_broken_image)
-                )
-                .into(viewDataBinding.albumDetailCover)
+                    RequestOptions().placeholder(R.drawable.loading_animation)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.ic_broken_image)
+                ).into(viewDataBinding.albumDetailCover)
         }
     }
 }

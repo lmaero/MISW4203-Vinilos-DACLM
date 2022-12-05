@@ -9,7 +9,8 @@ import com.example.grupo11_vinilos.R
 import com.example.grupo11_vinilos.databinding.CommentItemBinding
 import com.example.grupo11_vinilos.models.Comment
 
-class CommentsAdapter(private var comments: MutableList<Comment> ) : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>() {
+class CommentsAdapter(private var comments: MutableList<Comment>) :
+    RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
         val withDataBinding: CommentItemBinding = DataBindingUtil.inflate(

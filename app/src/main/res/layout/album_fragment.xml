@@ -37,6 +37,16 @@
             android:textScaleX="0.75"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addAlbumButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:contentDescription="@string/content_desc_create_album_button"
+            android:focusable="true"
+            android:src="@android:drawable/ic_input_add" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

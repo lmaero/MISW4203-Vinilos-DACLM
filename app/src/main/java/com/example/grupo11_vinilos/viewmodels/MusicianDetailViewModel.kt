@@ -45,11 +45,10 @@ class MusicianDetailViewModel(application: Application, musicianId: Int) :
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application, val musicianId: Int) : ViewModelProvider.Factory {
+    class Factory(val app: Application, private val musicianId: Int) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MusicianDetailViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return MusicianDetailViewModel(app, musicianId) as T
+                @Suppress("UNCHECKED_CAST") return MusicianDetailViewModel(app, musicianId) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
