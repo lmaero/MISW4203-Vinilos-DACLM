@@ -1,7 +1,9 @@
 package com.example.grupo11_vinilos.ui
 
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -136,5 +138,51 @@ class AlbumDetailFragmentTest {
         onView(withId(R.id.tracksTitleCardView)).check(matches(not(isDisplayed())))
         onView(withId(R.id.tracksCardView)).check(matches(not(isDisplayed())))
         Thread.sleep(500)
+    }
+
+    @Test
+    fun album_fragment_create_new_album() {
+
+        // Get te initial number of albums
+        Thread.sleep(2000)
+        var initAlbumsCount = -1
+        activityRule.scenario.onActivity { activityScenarioRule ->
+            val recyclerView = activityScenarioRule.findViewById<RecyclerView>(R.id.albumsRv)
+            initAlbumsCount = recyclerView.adapter?.itemCount!!
+            Log.d("InitialCount", initAlbumsCount.toString())
+        }
+
+        Thread.sleep(2000)
+        // Press the add button album
+        onView(withId(R.id.addAlbumButton)).perform(ViewActions.click())
+        Thread.sleep(500)
+
+        // Add album name
+        onView(withId(R.id.newAlbumName)).perform(ViewActions.typeText("Miss Monique"), ViewActions.closeSoftKeyboard())
+        Thread.sleep(500)
+
+        // Add album cover
+        onView(withId(R.id.newAlbumCover)).perform(ViewActions.typeText("https://media.istockphoto.com/id/1175435360/es/vector/icono-de-nota-musical-ilustraci%C3%B3n-vectorial.jpg?s=1024x1024&w=is&k=20&c=X4o4H-Q8tntcdvKkwnVeB5uho9EJxLHrk4JdXYqJI7E="), ViewActions.closeSoftKeyboard())
+        Thread.sleep(500)
+
+        // Add album release date
+        onView(withId(R.id.newAlbumReleaseDate)).perform(ViewActions.typeText("2022-12-02"), ViewActions.closeSoftKeyboard())
+        Thread.sleep(500)
+
+        // Add album genre
+        onView(withId(R.id.newAlbumGenre)).perform(ViewActions.typeText("Salsa"), ViewActions.closeSoftKeyboard())
+        Thread.sleep(500)
+
+        // Add album record
+        onView(withId(R.id.newAlbumRecordLabel)).perform(ViewActions.typeText("Elektra"), ViewActions.closeSoftKeyboard())
+        Thread.sleep(500)
+
+        // Add album description
+        onView(withId(R.id.newAlbumDescription)).perform(ViewActions.typeText("Este es un nuevo algun que acaba de ser lanzado"), ViewActions.closeSoftKeyboard())
+        Thread.sleep(500)
+
+        // Add album description
+        onView(withId(R.id.buttonSaveAlbumInformation)).perform(ViewActions.click())
+        Thread.sleep(2000)
     }
 }
