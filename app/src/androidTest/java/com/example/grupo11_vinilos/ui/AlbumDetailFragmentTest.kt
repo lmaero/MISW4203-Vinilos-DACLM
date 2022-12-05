@@ -35,8 +35,7 @@ class AlbumDetailFragmentTest {
         Thread.sleep(2000)
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                0,
-                click()
+                0, click()
             )
         )
         Thread.sleep(2000)
@@ -66,8 +65,7 @@ class AlbumDetailFragmentTest {
 
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                albumToSelect,
-                click()
+                albumToSelect, click()
             )
         )
         Thread.sleep(2000)
@@ -81,8 +79,7 @@ class AlbumDetailFragmentTest {
         Thread.sleep(2000)
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                0,
-                click()
+                0, click()
             )
         )
         Thread.sleep(2000)
@@ -103,8 +100,7 @@ class AlbumDetailFragmentTest {
         // Select the album to add a new comment
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                albumToSelect,
-                click()
+                albumToSelect, click()
             )
         )
 
@@ -130,12 +126,11 @@ class AlbumDetailFragmentTest {
         Thread.sleep(2000)
         // Get the new number of comments
 
-        onView(isRoot()).perform(ViewActions.pressBack());
+        onView(isRoot()).perform(ViewActions.pressBack())
         Thread.sleep(2000)
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                albumToSelect,
-                click()
+                albumToSelect, click()
             )
         )
         Thread.sleep(2000)
@@ -157,8 +152,7 @@ class AlbumDetailFragmentTest {
         Thread.sleep(2000)
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                1,
-                click()
+                1, click()
             )
         )
         Thread.sleep(2000)
@@ -185,27 +179,45 @@ class AlbumDetailFragmentTest {
         Thread.sleep(500)
 
         // Add album name
-        onView(withId(R.id.newAlbumName)).perform(ViewActions.typeText("Miss Monique"), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.newAlbumName)).perform(
+            ViewActions.typeText("Miss Monique"),
+            ViewActions.closeSoftKeyboard()
+        )
         Thread.sleep(500)
 
         // Add album cover
-        onView(withId(R.id.newAlbumCover)).perform(ViewActions.typeText("https://media.istockphoto.com/id/1175435360/es/vector/icono-de-nota-musical-ilustraci%C3%B3n-vectorial.jpg?s=1024x1024&w=is&k=20&c=X4o4H-Q8tntcdvKkwnVeB5uho9EJxLHrk4JdXYqJI7E="), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.newAlbumCover)).perform(
+            ViewActions.typeText("https://media.istockphoto.com/id/1175435360/es/vector/icono-de-nota-musical-ilustraci%C3%B3n-vectorial.jpg?s=1024x1024&w=is&k=20&c=X4o4H-Q8tntcdvKkwnVeB5uho9EJxLHrk4JdXYqJI7E="),
+            ViewActions.closeSoftKeyboard()
+        )
         Thread.sleep(500)
 
         // Add album release date
-        onView(withId(R.id.newAlbumReleaseDate)).perform(ViewActions.typeText("2022-12-02"), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.newAlbumReleaseDate)).perform(
+            ViewActions.typeText("2022-12-02"),
+            ViewActions.closeSoftKeyboard()
+        )
         Thread.sleep(500)
 
         // Add album genre
-        onView(withId(R.id.newAlbumGenre)).perform(ViewActions.typeText("Salsa"), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.newAlbumGenre)).perform(
+            ViewActions.typeText("Salsa"),
+            ViewActions.closeSoftKeyboard()
+        )
         Thread.sleep(500)
 
         // Add album record
-        onView(withId(R.id.newAlbumRecordLabel)).perform(ViewActions.typeText("Elektra"), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.newAlbumRecordLabel)).perform(
+            ViewActions.typeText("Elektra"),
+            ViewActions.closeSoftKeyboard()
+        )
         Thread.sleep(500)
 
         // Add album description
-        onView(withId(R.id.newAlbumDescription)).perform(ViewActions.typeText("Este es un nuevo algun que acaba de ser lanzado"), ViewActions.closeSoftKeyboard())
+        onView(withId(R.id.newAlbumDescription)).perform(
+            ViewActions.typeText("Este es un nuevo algun que acaba de ser lanzado"),
+            ViewActions.closeSoftKeyboard()
+        )
         Thread.sleep(500)
 
         // Add album description
