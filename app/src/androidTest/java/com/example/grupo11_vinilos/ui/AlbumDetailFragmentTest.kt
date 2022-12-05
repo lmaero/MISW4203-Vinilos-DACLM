@@ -47,21 +47,33 @@ class AlbumDetailFragmentTest {
         onView(withId(R.id.albumDetailReleaseDate)).check(matches(isDisplayed()))
         onView(withId(R.id.albumDetailDescription)).check(matches(isDisplayed()))
         Thread.sleep(500)
+
     }
 
     @Test
     fun album_detail_fragment_track_list_is_displayed() {
         Thread.sleep(2000)
+
+// Get te initial number of albums
+        var initAlbumsCount = -1
+        activityRule.scenario.onActivity { activityScenarioRule ->
+            val recyclerView = activityScenarioRule.findViewById<RecyclerView>(R.id.albumsRv)
+            initAlbumsCount = recyclerView.adapter?.itemCount!!
+        }
+
+        // Select a specific album with tracks and comments
+        val albumToSelect: Int = initAlbumsCount - 4
+
         onView(withId(R.id.albumsRv)).perform(
             RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
-                0,
+                albumToSelect,
                 click()
             )
         )
         Thread.sleep(2000)
         onView(withId(R.id.tracksTitleCardView)).check(matches(isDisplayed()))
-        onView(withId(R.id.tracksCardView)).check(matches(isDisplayed()))
         Thread.sleep(500)
+        onView(withId(R.id.tracksCardView)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -85,7 +97,7 @@ class AlbumDetailFragmentTest {
         val faker = Faker()
         val newCommentBody = faker.gameOfThrones.quotes()
         // Select a album with few comments
-        val albumToSelect: Int = (0..3).random()
+        val albumToSelect: Int = 0
 
         Thread.sleep(2000)
         // Select the album to add a new comment
@@ -95,7 +107,8 @@ class AlbumDetailFragmentTest {
                 click()
             )
         )
-        Thread.sleep(500)
+
+        Thread.sleep(2000)
         // Get te initial number of comments
         var initCommentsCount = -1
         activityRule.scenario.onActivity { activityScenarioRule ->
@@ -105,22 +118,36 @@ class AlbumDetailFragmentTest {
         Thread.sleep(2000)
         // Scroll to the new comment layout
         onView(withId(R.id.newCommentLayout)).perform(scrollTo())
-        Thread.sleep(500)
+        Thread.sleep(2000)
         // Rating the comment with the maximum value
         onView(withId(R.id.ratingValue5)).perform(click())
-        Thread.sleep(500)
+        Thread.sleep(2000)
         // Add new comment with the faker data
         onView(withId(R.id.commentEditText)).perform(typeText(newCommentBody), closeSoftKeyboard())
-        Thread.sleep(500)
+        Thread.sleep(2000)
         // Click on the add comment button
         onView(withId(R.id.createNewCommentButton)).perform(click())
-        Thread.sleep(1000)
+        Thread.sleep(2000)
         // Get the new number of comments
+
+        onView(isRoot()).perform(ViewActions.pressBack());
+        Thread.sleep(2000)
+        onView(withId(R.id.albumsRv)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
+                albumToSelect,
+                click()
+            )
+        )
+        Thread.sleep(2000)
+
         var finalCommentsCount = -1
         activityRule.scenario.onActivity { activityScenarioRule ->
             val recyclerView = activityScenarioRule.findViewById<RecyclerView>(R.id.comments)
             finalCommentsCount = recyclerView.adapter?.itemCount!!
         }
+        Thread.sleep(2000)
+
+
         // Check if the new number of comments is the initial number of comments plus one
         assertEquals(finalCommentsCount, initCommentsCount + 1)
     }
